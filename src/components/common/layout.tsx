@@ -2,7 +2,12 @@ import React, { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
-import { softLight } from '../../styles/themes';
+import {
+  softLight,
+  softDark,
+  neutralLight,
+  neutralDark,
+} from '../../styles/themes';
 import Globalstyles from '../../styles/global';
 import Header from './header';
 import Footer from './footer';
@@ -34,7 +39,7 @@ function Layout({ children }: Props) {
           rel="stylesheet"
         />
       </Helmet>
-      <ThemeProvider theme={softLight}>
+      <ThemeProvider theme={neutralDark}>
         <Globalstyles />
         <Container>
           <Header />

@@ -22,6 +22,7 @@ function Globalstyles() {
         }
 
         body {
+          background: ${theme.color.backMain};
           color: ${theme.color.textPrime};
           font-family: 'Spoqa Han Sans Neo', 'sans-serif';
           line-height: 1;
