@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const P = styled.p<{ size: string }>`
+export const P = styled.p<{ size?: string }>`
   font-size: ${props => {
     switch (props.size) {
       case 'xLarge':
@@ -40,7 +40,7 @@ export const P = styled.p<{ size: string }>`
   }};
 `;
 
-export const H1 = styled.h1<{ size: string }>`
+export const H1 = styled.h1<{ size?: string }>`
   font-size: ${props => {
     switch (props.size) {
       case 'xLarge':
@@ -80,7 +80,7 @@ export const H1 = styled.h1<{ size: string }>`
   }};
 `;
 
-export const H2 = styled.h2<{ size: string }>`
+export const H2 = styled.h2<{ size?: string }>`
   font-size: ${props => {
     switch (props.size) {
       case 'xLarge':
@@ -120,7 +120,7 @@ export const H2 = styled.h2<{ size: string }>`
   }};
 `;
 
-export const H3 = styled.h3<{ size: string }>`
+export const H3 = styled.h3<{ size?: string }>`
   font-size: ${props => {
     switch (props.size) {
       case 'xLarge':
