@@ -10,11 +10,7 @@ type Props = {
 
 const Wrapper = styled.li`
   padding: 1rem 0;
-  border-top: ${props => `1px solid ${props.theme.color.line}`};
-
-  &:last-child {
-    border-bottom: ${props => `1px solid ${props.theme.color.line}`};
-  }
+  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
 `;
 
 const Header = styled.div`

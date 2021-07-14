@@ -11,12 +11,8 @@ type Props = {
 
 const Wrapper = styled.li`
   padding: 1rem 0;
-  border-top: ${props => `1px solid ${props.theme.color.line}`};
+  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
   transition: background 300ms ease-in-out;
-
-  &:last-child {
-    border-bottom: ${props => `1px solid ${props.theme.color.line}`};
-  }
 `;
 
 const Info = styled.div``;
@@ -51,17 +47,17 @@ const Date = styled.p`
   line-height: 20px;
 `;
 
-const Tags = styled.ul`
+const TagList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: -0.25rem;
 `;
 
-const Tag = styled.li`
+const TagItem = styled.li`
   margin: 0 0.25rem 0.25rem 0;
 `;
 
-const TagLink = styled(Link)`
+const Tag = styled.span`
   padding: 0 0.5rem;
   border-radius: 1rem;
   color: ${props => props.theme.color.textSub};
@@ -83,13 +79,15 @@ function PostItem({ title, summary, tags, date }: Props) {
           <SummaryLink to="/">{summary}</SummaryLink>
         </Summary>
         <Date>{date}</Date>
-        <Tags>
+        <TagList>
           {tags.map(tag => (
-            <Tag key={tag}>
-              <TagLink to="/">{tag}</TagLink>
-            </Tag>
+            <TagItem key={tag}>
+              <Link to="/">
+                <Tag>{tag}</Tag>
+              </Link>
+            </TagItem>
           ))}
-        </Tags>
+        </TagList>
       </Info>
     </Wrapper>
   );

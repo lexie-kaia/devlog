@@ -4,6 +4,7 @@ import Layout from '../components/common/layout';
 import Hero from '../components/main/hero';
 import PostItem from '../components/main/postitem';
 import CategoryItem from '../components/main/categoryitem';
+import TagItem from '../components/main/tagitem';
 
 const posts = [
   {
@@ -102,69 +103,104 @@ const categories = [
   },
 ];
 
+const tags = [
+  'react',
+  'gatsby',
+  'nextjs',
+  'js',
+  'html',
+  'css',
+  'sass',
+  'gatsby',
+];
+
 const Main = styled.main`
   @media screen and (min-width: 768px) {
     display: flex;
   }
 `;
 
-const Post = styled.section`
-  padding: 1rem;
+const Left = styled.div`
   @media screen and (min-width: 768px) {
     flex: 2;
   }
 `;
 
-const Category = styled.section`
-  padding: 1rem;
+const Right = styled.div`
   @media screen and (min-width: 768px) {
     flex: 1;
   }
 `;
 
+const Section = styled.section`
+  padding: 1rem;
+  /* border: 1px solid red; */
+`;
+
 const SectionTitle = styled.h2`
-  margin: 0.5rem 0 1rem;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
   text-transform: uppercase;
+  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
 `;
 
 const PostList = styled.ul``;
 
 const CategoryList = styled.ul``;
 
+const TagList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  margin-bottom: -0.5rem;
+`;
+
 function Home() {
   return (
     <Layout>
       <Hero />
       <Main>
-        <Post>
-          <SectionTitle>Posts</SectionTitle>
-          <PostList>
-            {posts.map(post => (
-              <PostItem
-                key={post.id}
-                title={post.title}
-                summary={post.summary}
-                tags={post.tags}
-                date={post.date}
-              />
-            ))}
-          </PostList>
-        </Post>
-        <Category>
-          <SectionTitle>Categories</SectionTitle>
-          <CategoryList>
-            {categories.map(category => (
-              <CategoryItem
-                key={category.heading}
-                heading={category.heading}
-                posts={category.posts}
-              />
-            ))}
-          </CategoryList>
-        </Category>
+        <Left>
+          <Section>
+            <SectionTitle>Posts</SectionTitle>
+            <PostList>
+              {posts.map(post => (
+                <PostItem
+                  key={post.id}
+                  title={post.title}
+                  summary={post.summary}
+                  tags={post.tags}
+                  date={post.date}
+                />
+              ))}
+            </PostList>
+          </Section>
+        </Left>
+        <Right>
+          <Section>
+            <SectionTitle>Categories</SectionTitle>
+            <CategoryList>
+              {categories.map(category => (
+                <CategoryItem
+                  key={category.heading}
+                  heading={category.heading}
+                  posts={category.posts}
+                />
+              ))}
+            </CategoryList>
+          </Section>
+          <Section>
+            <SectionTitle>Tags</SectionTitle>
+            <TagList>
+              {tags.map(tag => (
+                <TagItem key={tag} tag={tag} />
+              ))}
+            </TagList>
+          </Section>
+        </Right>
       </Main>
     </Layout>
   );
