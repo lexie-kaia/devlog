@@ -23,7 +23,7 @@ function Globalstyles() {
 
         body {
           background: ${theme.color.backMain};
-          color: ${theme.color.textPrime};
+          color: ${theme.color.textMain};
           font-family: 'Spoqa Han Sans Neo', 'sans-serif';
           line-height: 1;
         }

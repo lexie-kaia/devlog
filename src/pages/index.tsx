@@ -2,46 +2,68 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Layout from '../components/common/layout';
 import Hero from '../components/main/hero';
-import { H2 } from '../styles/typo';
 import PostItem from '../components/main/postitem';
 import CategoryItem from '../components/main/categoryitem';
 
 const posts = [
   {
     title: '포스트 테스트입니다',
-    tags: ['html', 'css', 'js'],
+    tags: [
+      'html',
+      'css',
+      'js',
+      'react',
+      'gatsby',
+      'react',
+      'gatsby',
+      'react',
+      'gatsby',
+    ],
     id: 1,
     date: '2020.20.20',
+    summary:
+      '한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지',
   },
   {
     title: '개츠비 블로그 만들기',
-    tags: ['react', 'gatsby'],
+    tags: [
+      'react',
+      'gatsby',
+      'react',
+      'gatsby',
+      'react',
+      'gatsby',
+      'react',
+      'gatsby',
+    ],
     id: 2,
     date: '2020.20.20',
+    summary:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non mauris arcu. Mauris interdum viverra cursus. Aliquam congue molestie blandit.',
   },
   {
     title: '포스트 테스트입니다',
     tags: ['html', 'css', 'js'],
     id: 1,
     date: '2020.20.20',
+    summary:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non mauris arcu. Mauris interdum viverra cursus. Aliquam congue molestie blandit.',
   },
   {
     title: '개츠비 블로그 만들기',
     tags: ['react', 'gatsby'],
     id: 2,
     date: '2020.20.20',
+    summary:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non mauris arcu. Mauris interdum viverra cursus. Aliquam congue molestie blandit.',
   },
   {
     title: '포스트 테스트입니다',
     tags: ['html', 'css', 'js'],
     id: 1,
     date: '2020.20.20',
-  },
-  {
-    title: '개츠비 블로그 만들기',
-    tags: ['react', 'gatsby'],
-    id: 2,
-    date: '2020.20.20',
+    summary:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam non mauris arcu. Mauris interdum viverra cursus. Aliquam congue molestie blandit.',
   },
 ];
 
@@ -81,23 +103,31 @@ const categories = [
 ];
 
 const Main = styled.main`
-  display: flex;
+  @media screen and (min-width: 768px) {
+    display: flex;
+  }
 `;
 
 const Post = styled.section`
-  flex: 2;
   padding: 1rem;
+  @media screen and (min-width: 768px) {
+    flex: 2;
+  }
 `;
 
 const Category = styled.section`
-  flex: 1;
   padding: 1rem;
+  @media screen and (min-width: 768px) {
+    flex: 1;
+  }
 `;
 
-const SectionTitle = styled(H2)`
+const SectionTitle = styled.h2`
   margin: 0.5rem 0 1rem;
-  text-transform: uppercase;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 20px;
+  text-transform: uppercase;
 `;
 
 const PostList = styled.ul``;
@@ -110,12 +140,13 @@ function Home() {
       <Hero />
       <Main>
         <Post>
-          <SectionTitle size="small">Posts</SectionTitle>
+          <SectionTitle>Posts</SectionTitle>
           <PostList>
             {posts.map(post => (
               <PostItem
                 key={post.id}
                 title={post.title}
+                summary={post.summary}
                 tags={post.tags}
                 date={post.date}
               />
@@ -123,7 +154,7 @@ function Home() {
           </PostList>
         </Post>
         <Category>
-          <SectionTitle size="small">Categories</SectionTitle>
+          <SectionTitle>Categories</SectionTitle>
           <CategoryList>
             {categories.map(category => (
               <CategoryItem

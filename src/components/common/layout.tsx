@@ -2,12 +2,7 @@ import React, { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
-import {
-  softLight,
-  softDark,
-  neutralLight,
-  neutralDark,
-} from '../../styles/themes';
+import { softLight, softDark, hardLight, hardDark } from '../../styles/themes';
 import Globalstyles from '../../styles/global';
 import Header from './header';
 import Footer from './footer';
@@ -18,9 +13,11 @@ type Props = {
 
 const Container = styled.div`
   margin: 0 auto;
-  padding: 0 5rem;
   max-width: 1240px;
-  /* border: 1px solid red; */
+
+  @media screen and (min-width: 960px) {
+    padding: 0 5rem;
+  }
 `;
 
 function Layout({ children }: Props) {
@@ -39,7 +36,7 @@ function Layout({ children }: Props) {
           rel="stylesheet"
         />
       </Helmet>
-      <ThemeProvider theme={neutralDark}>
+      <ThemeProvider theme={softLight}>
         <Globalstyles />
         <Container>
           <Header />

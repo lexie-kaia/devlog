@@ -6,9 +6,10 @@ declare module '@emotion/react' {
       backMain: string;
       backSub: string;
       line: string;
-      textPrime: string;
-      textSecond: string;
-      highlight: string;
+      textMain: string;
+      textSub: string;
+      accentSub: string;
+      accentMain: string;
     };
     breakpoint: {
       tablet: string;
