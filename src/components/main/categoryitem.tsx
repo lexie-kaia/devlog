@@ -23,8 +23,13 @@ const Title = styled.h4``;
 
 const ButtonText = styled.button`
   font-size: 16px;
-  line-height: 20px;
+  line-height: 24px;
   font-weight: 500;
+
+  &:hover,
+  &:focus {
+    color: ${props => props.theme.color.highlight};
+  }
 `;
 
 const ButtonPlus = styled.button<{ isClicked: boolean }>`
@@ -38,28 +43,38 @@ const ButtonPlus = styled.button<{ isClicked: boolean }>`
     transition: transform 200ms ease-in-out;
   }
 
+  &:hover,
+  &:focus {
+    color: ${props => props.theme.color.highlight};
+  }
+
   svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
   }
 `;
 
 const Posts = styled.ul<{ isClicked: boolean }>`
   display: ${props => (props.isClicked ? 'block' : 'none')};
   margin-top: 1rem;
+  font-size: 16px;
+  line-height: 24px;
+  color: ${props => props.theme.color.textSub};
 `;
 
 const Post = styled.li`
-  font-size: 16px;
-  line-height: 20px;
-  margin-bottom: 0.5rem;
-  color: ${props => props.theme.color.textSub};
+  margin-bottom: 0.25rem;
 
   &:last-child {
     margin-bottom: 0;
   }
+`;
 
-  &:hover {
+const PostLink = styled(Link)`
+  &:hover,
+  &:focus {
+    outline: none;
+    color: ${props => props.theme.color.highlight};
     text-decoration: underline;
   }
 `;
@@ -90,7 +105,7 @@ function CategoryItem({ heading, posts }: Props) {
       <Posts isClicked={isClicked}>
         {posts.map(post => (
           <Post key={post.title}>
-            <Link to={post.link}>{post.title}</Link>
+            <PostLink to={post.link}>{post.title}</PostLink>
           </Post>
         ))}
       </Posts>

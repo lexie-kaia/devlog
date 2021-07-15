@@ -138,8 +138,7 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  margin-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem 0;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;

@@ -45,7 +45,6 @@ function Globalstyles() {
           cursor: pointer;
 
           &:focus {
-            outline: none;
             box-shadow: none;
           }
         }
@@ -59,7 +58,6 @@ function Globalstyles() {
           font-size: inherit;
 
           &:focus {
-            outline: none;
             box-shadow: none;
           }
         }

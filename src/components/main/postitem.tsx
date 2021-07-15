@@ -10,7 +10,7 @@ type Props = {
 };
 
 const Wrapper = styled.li`
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   border-bottom: ${props => `1px solid ${props.theme.color.line}`};
   transition: background 300ms ease-in-out;
 `;
@@ -19,29 +19,35 @@ const Info = styled.div``;
 
 const Title = styled.h3`
   margin-bottom: 0.5rem;
+  font-size: 22px;
+  line-height: 28px;
 `;
 
 const TitleLink = styled(Link)`
-  font-size: 22px;
-  line-height: 28px;
-
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
+    color: ${props => props.theme.color.highlight};
     text-decoration: underline;
   }
 `;
 
 const Summary = styled.p`
   margin-bottom: 0.4rem;
-`;
-
-const SummaryLink = styled(Link)`
   font-size: 16px;
-  line-height: 20px;
+  line-height: 24px;
   color: ${props => props.theme.color.textSub};
 `;
 
+const SummaryLink = styled(Link)`
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
+`;
+
 const Date = styled.p`
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.5rem;
   color: ${props => props.theme.color.textSub};
   font-size: 14px;
   line-height: 20px;
@@ -57,15 +63,22 @@ const TagItem = styled.li`
   margin: 0 0.25rem 0.25rem 0;
 `;
 
-const Tag = styled.span`
+const TagLink = styled(Link)`
   padding: 0 0.5rem;
   border-radius: 1rem;
   color: ${props => props.theme.color.textSub};
   border: ${props => `1px solid ${props.theme.color.line}`};
-  font-size: 12px;
+  font-size: 13px;
   line-height: 20px;
   text-transform: uppercase;
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: ${props => props.theme.color.highlight};
+    border: ${props => `1px solid ${props.theme.color.highlight}`};
+  }
 `;
 
 function PostItem({ title, summary, tags, date }: Props) {
@@ -82,9 +95,7 @@ function PostItem({ title, summary, tags, date }: Props) {
         <TagList>
           {tags.map(tag => (
             <TagItem key={tag}>
-              <Link to="/">
-                <Tag>{tag}</Tag>
-              </Link>
+              <TagLink to="/">{tag}</TagLink>
             </TagItem>
           ))}
         </TagList>

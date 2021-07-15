@@ -10,11 +10,7 @@ export const softLight = {
     line: '#e1e4e6',
     textMain: '#363a3c',
     textSub: '#878d91',
-    accentMain: '#4c80f1',
-    accentSub: '#8ab4f8',
-  },
-  breakpoint: {
-    ...breakpoint,
+    highlight: '#4c80f1',
   },
 };
 
@@ -25,11 +21,7 @@ export const softDark = {
     line: '#3C4043',
     textMain: '#bdc1c6',
     textSub: '#969ba1',
-    accentMain: '#4c80f1',
-    accentSub: '#8ab4f8',
-  },
-  breakpoint: {
-    ...breakpoint,
+    highlight: '#8ab4f8',
   },
 };
 
@@ -40,11 +32,7 @@ export const hardLight = {
     line: '#eaeaea',
     textMain: '#111111',
     textSub: '#696969',
-    accentMain: '#5997ff',
-    accentSub: '#0060ff',
-  },
-  breakpoint: {
-    ...breakpoint,
+    highlight: '#196fff',
   },
 };
 
@@ -55,10 +43,6 @@ export const hardDark = {
     line: '#414141',
     textMain: '#ffffff',
     textSub: '#b2b2b2',
-    accentMain: '#5997ff',
-    accentSub: '#0060ff',
-  },
-  breakpoint: {
-    ...breakpoint,
+    highlight: '#0060ff',
   },
 };

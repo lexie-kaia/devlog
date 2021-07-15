@@ -8,12 +8,7 @@ declare module '@emotion/react' {
       line: string;
       textMain: string;
       textSub: string;
-      accentSub: string;
-      accentMain: string;
-    };
-    breakpoint: {
-      tablet: string;
-      mobile: string;
+      highlight: string;
     };
   }
 }

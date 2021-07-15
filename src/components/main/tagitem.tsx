@@ -10,24 +10,29 @@ const Wrapper = styled.li`
   margin: 0 0.5rem 0.5rem 0;
 `;
 
-const Tag = styled.span`
+const TagLink = styled(Link)`
   display: block;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   color: ${props => props.theme.color.textSub};
   border: ${props => `1px solid ${props.theme.color.line}`};
-  font-size: 12px;
+  font-size: 13px;
   line-height: 20px;
   text-transform: uppercase;
   cursor: pointer;
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: ${props => props.theme.color.highlight};
+    border: ${props => `1px solid ${props.theme.color.highlight}`};
+  }
 `;
 
 function TagItem({ tag }: Props) {
   return (
     <Wrapper>
-      <Link to="/">
-        <Tag>{tag}</Tag>
-      </Link>
+      <TagLink to="/">{tag}</TagLink>
     </Wrapper>
   );
 }
