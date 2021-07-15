@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Layout from '../components/common/layout';
 import Hero from '../components/main/hero';
+import Section from '../components/main/section';
 import PostItem from '../components/main/postitem';
 import CategoryItem from '../components/main/categoryitem';
 import TagItem from '../components/main/tagitem';
@@ -132,20 +133,6 @@ const Right = styled.div`
   }
 `;
 
-const Section = styled.section`
-  padding: 1rem;
-  /* border: 1px solid red; */
-`;
-
-const SectionTitle = styled.h2`
-  padding: 1rem 0;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
-  text-transform: uppercase;
-  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
-`;
-
 const PostList = styled.ul``;
 
 const CategoryList = styled.ul``;
@@ -163,8 +150,7 @@ function Home() {
       <Hero />
       <Main>
         <Left>
-          <Section>
-            <SectionTitle>Posts</SectionTitle>
+          <Section title="posts">
             <PostList>
               {posts.map(post => (
                 <PostItem
@@ -179,8 +165,7 @@ function Home() {
           </Section>
         </Left>
         <Right>
-          <Section>
-            <SectionTitle>Categories</SectionTitle>
+          <Section title="categories">
             <CategoryList>
               {categories.map(category => (
                 <CategoryItem
@@ -191,8 +176,7 @@ function Home() {
               ))}
             </CategoryList>
           </Section>
-          <Section>
-            <SectionTitle>Tags</SectionTitle>
+          <Section title="tags">
             <TagList>
               {tags.map(tag => (
                 <TagItem key={tag} tag={tag} />
