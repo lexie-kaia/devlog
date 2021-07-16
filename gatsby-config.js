@@ -15,7 +15,6 @@ module.exports = {
       options: {
         defaults: {
           placeholder: `blurred`,
-          breakpoints: [576, 768, 960],
         },
       },
     },

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
+import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image';
 
-type Props = {
+export type PostType = {
   title: string;
+  category: string;
+  date: string;
   summary: string;
   tags: string[];
-  date: string;
+  thumbnail: ImageDataLike;
 };
 
 const Wrapper = styled.li`
@@ -29,13 +32,15 @@ const Info = styled.div`
 const Thumb = styled.div`
   overflow: hidden;
   width: 100%;
-  height: 172px;
+  height: 0;
+  padding-bottom: 68%;
   background: whitesmoke;
   margin-top: 1rem;
 
   @media screen and (min-width: 577px) {
     flex-shrink: 0;
     margin-top: 0;
+    padding-bottom: 0;
     width: 200px;
     height: 136px;
   }
@@ -105,14 +110,26 @@ const TagLink = styled(Link)`
   }
 `;
 
-function PostItem({ title, summary, tags, date }: Props) {
+function PostItem({
+  title,
+  category,
+  date,
+  summary,
+  tags,
+  thumbnail,
+}: PostType) {
+  const thumbnailData = getImage(thumbnail);
+  console.log(thumbnailData);
+
   return (
     <Wrapper>
       <Info>
         <Title>
           <TitleLink to="/">{title}</TitleLink>
         </Title>
-        <CategoryAndDate>카테고리 - {date}</CategoryAndDate>
+        <CategoryAndDate>
+          {category} - {date}
+        </CategoryAndDate>
         <Summary>
           <SummaryLink to="/">{summary}</SummaryLink>
         </Summary>
@@ -124,7 +141,11 @@ function PostItem({ title, summary, tags, date }: Props) {
           ))}
         </TagList>
       </Info>
-      <Thumb></Thumb>
+      {thumbnailData && (
+        <Thumb>
+          <GatsbyImage image={thumbnailData} alt=""></GatsbyImage>
+        </Thumb>
+      )}
     </Wrapper>
   );
 }

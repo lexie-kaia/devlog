@@ -4,7 +4,8 @@ import styled from '@emotion/styled';
 import Layout from '../components/common/layout';
 import Hero from '../components/main/hero';
 import Section from '../components/main/section';
-import PostItem from '../components/main/postitem';
+import Posts from '../components/main/posts';
+
 import CategoryItem from '../components/main/categoryitem';
 import TagItem from '../components/main/tagitem';
 
@@ -116,8 +117,6 @@ const Right = styled.div`
   }
 `;
 
-const PostList = styled.ul``;
-
 const CategoryList = styled.ul``;
 
 const TagList = styled.ul`
@@ -128,43 +127,35 @@ const TagList = styled.ul`
 `;
 
 function Home({ data }: Props) {
-  console.log(data);
+  const {
+    allMdx: { edges: posts },
+  } = data;
   return (
     <Layout>
       <Hero />
       <Main>
         <Left>
           <Section title="posts">
-            <PostList>
-              {posts.map(post => (
-                <PostItem
-                  key={post.id}
-                  title={post.title}
-                  summary={post.summary}
-                  tags={post.tags}
-                  date={post.date}
-                />
-              ))}
-            </PostList>
+            <Posts posts={posts}></Posts>
           </Section>
         </Left>
         <Right>
           <Section title="categories">
             <CategoryList>
-              {categories.map(category => (
+              {/* {categories.map(category => (
                 <CategoryItem
                   key={category.heading}
                   heading={category.heading}
                   posts={category.posts}
                 />
-              ))}
+              ))} */}
             </CategoryList>
           </Section>
           <Section title="tags">
             <TagList>
-              {tags.map(tag => (
+              {/* {tags.map(tag => (
                 <TagItem key={tag} tag={tag} />
-              ))}
+              ))} */}
             </TagList>
           </Section>
         </Right>
@@ -180,17 +171,26 @@ export const queryIndex = graphql`
     allMdx(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
     ) {
-      nodes {
-        frontmatter {
-          date(formatString: "YYYY.MM.DD")
-          summary
-          thumbnail {
-            publicURL
+      edges {
+        node {
+          id
+          frontmatter {
+            category
+            date(formatString: "YYYY.MM.DD")
+            summary
+            tags
+            thumbnail {
+              childImageSharp {
+                gatsbyImageData(
+                  layout: FULL_WIDTH
+                  breakpoints: [576]
+                  aspectRatio: 1.47
+                )
+              }
+            }
+            title
           }
-          title
-          tags
         }
-        id
       }
     }
   }
