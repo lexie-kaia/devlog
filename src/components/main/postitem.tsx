@@ -13,9 +13,33 @@ const Wrapper = styled.li`
   padding: 1.25rem 0;
   border-bottom: ${props => `1px solid ${props.theme.color.line}`};
   transition: background 300ms ease-in-out;
+
+  @media screen and (min-width: 577px) {
+    display: flex;
+  }
 `;
 
-const Info = styled.div``;
+const Info = styled.div`
+  @media screen and (min-width: 577px) {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+`;
+
+const Thumb = styled.div`
+  overflow: hidden;
+  width: 100%;
+  height: 172px;
+  background: whitesmoke;
+  margin-top: 1rem;
+
+  @media screen and (min-width: 577px) {
+    flex-shrink: 0;
+    margin-top: 0;
+    width: 200px;
+    height: 136px;
+  }
+`;
 
 const Title = styled.h3`
   margin-bottom: 0.5rem;
@@ -32,8 +56,15 @@ const TitleLink = styled(Link)`
   }
 `;
 
+const CategoryAndDate = styled.p`
+  margin-bottom: 0.25rem;
+  color: ${props => props.theme.color.textSub};
+  font-size: 14px;
+  line-height: 20px;
+`;
+
 const Summary = styled.p`
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.theme.color.textSub};
@@ -44,13 +75,6 @@ const SummaryLink = styled(Link)`
     outline: none;
     text-decoration: underline;
   }
-`;
-
-const Date = styled.p`
-  margin-bottom: 0.5rem;
-  color: ${props => props.theme.color.textSub};
-  font-size: 14px;
-  line-height: 20px;
 `;
 
 const TagList = styled.ul`
@@ -88,10 +112,10 @@ function PostItem({ title, summary, tags, date }: Props) {
         <Title>
           <TitleLink to="/">{title}</TitleLink>
         </Title>
+        <CategoryAndDate>카테고리 - {date}</CategoryAndDate>
         <Summary>
           <SummaryLink to="/">{summary}</SummaryLink>
         </Summary>
-        <Date>{date}</Date>
         <TagList>
           {tags.map(tag => (
             <TagItem key={tag}>
@@ -100,6 +124,7 @@ function PostItem({ title, summary, tags, date }: Props) {
           ))}
         </TagList>
       </Info>
+      <Thumb></Thumb>
     </Wrapper>
   );
 }
