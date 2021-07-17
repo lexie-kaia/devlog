@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import PostItem from './postitem';
-import { IGatsbyImageData } from 'gatsby-plugin-image';
 import { PostType } from './postitem';
+import { useMemo } from 'react';
 
 type Props = {
   allPosts: PostQlDataType[];
+  currentTag: string;
 };
 
 export type PostQlDataType = {
@@ -17,10 +18,22 @@ export type PostQlDataType = {
 
 const PostList = styled.ul``;
 
-function Posts({ allPosts }: Props) {
+function Posts({ allPosts, currentTag }: Props) {
+  const posts = useMemo(() => {
+    return allPosts.filter((post: PostQlDataType) => {
+      const {
+        node: {
+          frontmatter: { tags },
+        },
+      } = post;
+
+      return currentTag !== 'all' ? tags.includes(currentTag) : true;
+    });
+  }, [currentTag]);
+
   return (
     <PostList>
-      {allPosts.map(
+      {posts.map(
         ({
           node: {
             frontmatter: { ...props },

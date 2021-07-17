@@ -75,7 +75,7 @@ function Home({ data, location }: Props) {
       <Main>
         <Left>
           <Section title="posts">
-            <Posts allPosts={allPosts}></Posts>
+            <Posts allPosts={allPosts} currentTag={currentTag}></Posts>
           </Section>
         </Left>
         <Right>
