@@ -85,13 +85,13 @@ const TagLink = styled(Link)`
 
   &:hover,
   &:focus {
+    outline: none;
     text-decoration: underline;
   }
 `;
 
 function PostItem({ title, date, summary, tags, thumbnail }: PostType) {
   const thumbnailData = getImage(thumbnail);
-  console.log(thumbnailData);
 
   return (
     <Wrapper>
@@ -106,7 +106,7 @@ function PostItem({ title, date, summary, tags, thumbnail }: PostType) {
         <TagList>
           {tags.map(tag => (
             <TagItem key={tag}>
-              <TagLink to="/">{tag}</TagLink>
+              <TagLink to={`/?tag=${tag}`}>{tag}</TagLink>
             </TagItem>
           ))}
         </TagList>

@@ -4,35 +4,41 @@ import styled from '@emotion/styled';
 
 type Props = {
   tag: string;
+  count: number;
+  currentTag: string;
 };
 
-const Wrapper = styled.li`
-  margin: 0 0.5rem 0.5rem 0;
-`;
-
-const TagLink = styled(Link)`
-  display: block;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  color: ${props => props.theme.color.textSub};
-  border: ${props => `1px solid ${props.theme.color.line}`};
-  font-size: 13px;
+const Wrapper = styled.li<{ isCurrentTag: boolean }>`
+  margin-bottom: 0.75rem;
+  font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
-  cursor: pointer;
 
-  &:hover,
-  &:focus {
-    outline: none;
-    color: ${props => props.theme.color.highlight};
-    border: ${props => `1px solid ${props.theme.color.highlight}`};
+  a {
+    &:before {
+      content: '#';
+    }
+
+    color: ${props =>
+      props.isCurrentTag
+        ? props.theme.color.highlight
+        : props.theme.color.textSub};
+
+    &:hover,
+    &:focus {
+      outline: none;
+      color: ${props => props.theme.color.highlight};
+      text-decoration: underline;
+    }
   }
 `;
 
-function TagItem({ tag }: Props) {
+function TagItem({ tag, count, currentTag }: Props) {
   return (
-    <Wrapper>
-      <TagLink to="/">{tag}</TagLink>
+    <Wrapper isCurrentTag={tag === currentTag}>
+      <Link to={tag === 'all' ? '/' : `/?tag=${tag}`}>
+        {tag} ({count})
+      </Link>
     </Wrapper>
   );
 }

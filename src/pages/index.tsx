@@ -1,101 +1,19 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
+import queryString from 'query-string';
+
 import Layout from '../components/common/layout';
 import Hero from '../components/main/hero';
 import Section from '../components/main/section';
-import Posts from '../components/main/posts';
-
-import CategoryItem from '../components/main/categoryitem';
-import TagItem from '../components/main/tagitem';
-
-const posts = [
-  {
-    title: '포스트 테스트입니다',
-    tags: ['html', 'css', 'js', 'react', 'gatsby'],
-    id: 1,
-    date: '2020.20.20',
-    summary:
-      '한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트',
-  },
-  {
-    title: '개츠비 블로그 만들기',
-    tags: ['react', 'gatsby', 'react', 'gatsby', 'react'],
-    id: 2,
-    date: '2020.20.20',
-    summary: '한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은',
-  },
-  {
-    title: '포스트 테스트입니다',
-    tags: ['html', 'css', 'js'],
-    id: 1,
-    date: '2020.20.20',
-    summary:
-      '한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은 어떨지 한글테스트',
-  },
-  {
-    title: '개츠비 블로그 만들기',
-    tags: ['react', 'gatsby'],
-    id: 2,
-    date: '2020.20.20',
-    summary: '한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은',
-  },
-  {
-    title: '포스트 테스트입니다',
-    tags: ['html', 'css', 'js'],
-    id: 1,
-    date: '2020.20.20',
-    summary: '한글테스트 과연 한글은 어떨지 한글테스트 과연 한글은',
-  },
-];
-
-const categories = [
-  {
-    heading: 'JavaScript',
-    posts: [
-      { title: '카테고리 테스트입니다', link: '/' },
-      { title: '바닐라 자바스크립트', link: '/' },
-    ],
-  },
-  {
-    heading: 'TypeScript',
-    posts: [
-      { title: '카테고리 테스트입니다', link: '/' },
-      { title: '타입스크립트와 리액트', link: '/' },
-      { title: '카테고리 테스트입니다', link: '/' },
-      { title: '타입스크립트와 리액트', link: '/' },
-    ],
-  },
-  {
-    heading: 'TypeScript',
-    posts: [
-      { title: '카테고리 테스트입니다', link: '/' },
-      { title: '타입스크립트와 리액트', link: '/' },
-      { title: '카테고리 테스트입니다', link: '/' },
-      { title: '타입스크립트와 리액트', link: '/' },
-    ],
-  },
-  {
-    heading: 'TypeScript',
-    posts: [
-      { title: '카테고리 테스트입니다', link: '/' },
-      { title: '타입스크립트와 리액트', link: '/' },
-    ],
-  },
-];
-
-const tags = [
-  'react',
-  'gatsby',
-  'nextjs',
-  'js',
-  'html',
-  'css',
-  'sass',
-  'gatsby',
-];
+import Posts, { PostQlDataType } from '../components/main/posts';
+import Tags, { TagType } from '../components/main/tags';
 
 type Props = {
+  location: {
+    path: string;
+    search: string;
+  };
   data: any;
 };
 
@@ -117,35 +35,52 @@ const Right = styled.div`
   }
 `;
 
-const CategoryList = styled.ul``;
-
-const TagList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 1rem;
-  margin-bottom: -0.5rem;
-`;
-
-function Home({ data }: Props) {
+function Home({ data, location }: Props) {
   const {
-    allMdx: { edges: posts },
+    allMdx: { edges: allPosts },
   } = data;
+
+  const query = queryString.parse(location.search);
+  const currentTag =
+    query.tag && typeof query.tag === 'string' ? query.tag : 'all';
+
+  const allTags = useMemo(() => {
+    return allPosts.reduce(
+      (allTags: TagType, post: PostQlDataType) => {
+        const {
+          node: {
+            frontmatter: { tags },
+          },
+        } = post;
+
+        tags.forEach(tag => {
+          if (allTags[tag] == null) {
+            allTags[tag] = 1;
+          } else {
+            allTags[tag]++;
+          }
+        });
+
+        allTags['all']++;
+
+        return allTags;
+      },
+      { all: 0 }
+    );
+  }, []);
+
   return (
     <Layout>
       <Hero />
       <Main>
         <Left>
           <Section title="posts">
-            <Posts posts={posts}></Posts>
+            <Posts allPosts={allPosts}></Posts>
           </Section>
         </Left>
         <Right>
           <Section title="tags">
-            <TagList>
-              {/* {tags.map(tag => (
-                <TagItem key={tag} tag={tag} />
-              ))} */}
-            </TagList>
+            <Tags allTags={allTags} currentTag={currentTag}></Tags>
           </Section>
         </Right>
       </Main>

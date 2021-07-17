@@ -5,10 +5,10 @@ import { IGatsbyImageData } from 'gatsby-plugin-image';
 import { PostType } from './postitem';
 
 type Props = {
-  posts: PostQlDataType[];
+  allPosts: PostQlDataType[];
 };
 
-type PostQlDataType = {
+export type PostQlDataType = {
   node: {
     frontmatter: PostType;
     id: string;
@@ -17,17 +17,17 @@ type PostQlDataType = {
 
 const PostList = styled.ul``;
 
-function Posts({ posts }: Props) {
+function Posts({ allPosts }: Props) {
   return (
     <PostList>
-      {posts.map(
+      {allPosts.map(
         ({
           node: {
-            frontmatter: { ...rest },
+            frontmatter: { ...props },
             id: id,
           },
         }) => (
-          <PostItem key={id} {...rest} />
+          <PostItem key={id} {...props} />
         )
       )}
     </PostList>
