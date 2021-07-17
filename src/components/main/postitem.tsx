@@ -11,6 +11,8 @@ export type PostType = {
   thumbnail: ImageDataLike;
 };
 
+type Props = PostType & { slug: string };
+
 const Wrapper = styled.li`
   padding: 1.5rem 0;
   border-bottom: ${props => `1px solid ${props.theme.color.line}`};
@@ -19,27 +21,18 @@ const Wrapper = styled.li`
 
 const Info = styled.div``;
 
-const Thumb = styled.div`
-  overflow: hidden;
-  width: 100%;
-  height: 0;
-  padding-bottom: 40%;
-  background: whitesmoke;
-  margin-top: 1.25rem;
-`;
-
 const Title = styled.h3`
   margin-bottom: 0.5rem;
   font-size: 22px;
   line-height: 28px;
-`;
 
-const TitleLink = styled(Link)`
-  &:hover,
-  &:focus {
-    outline: none;
-    color: ${props => props.theme.color.highlight};
-    text-decoration: underline;
+  a {
+    &:hover,
+    &:focus {
+      outline: none;
+      color: ${props => props.theme.color.highlight};
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -55,12 +48,12 @@ const Summary = styled.p`
   font-size: 16px;
   line-height: 24px;
   color: ${props => props.theme.color.textSub};
-`;
 
-const SummaryLink = styled(Link)`
-  &:focus {
-    outline: none;
-    text-decoration: underline;
+  a {
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
   }
 `;
 
@@ -72,49 +65,63 @@ const TagList = styled.ul`
 
 const TagItem = styled.li`
   margin: 0 0.25rem 0.25rem 0;
-`;
-
-const TagLink = styled(Link)`
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
-  &:before {
-    content: '#';
-  }
-  color: ${props => props.theme.color.highlight};
 
-  &:hover,
-  &:focus {
-    outline: none;
-    text-decoration: underline;
+  a {
+    &:before {
+      content: '#';
+    }
+
+    color: ${props => props.theme.color.highlight};
+
+    &:hover,
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
   }
 `;
 
-function PostItem({ title, date, summary, tags, thumbnail }: PostType) {
+const Thumbnail = styled.div`
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  padding-bottom: 40%;
+  background: whitesmoke;
+  margin-top: 1.25rem;
+`;
+
+const ImageLink = styled(Link)``;
+
+function PostItem({ title, date, summary, tags, thumbnail, slug }: Props) {
   const thumbnailData = getImage(thumbnail);
 
   return (
     <Wrapper>
       <Info>
         <Title>
-          <TitleLink to="/">{title}</TitleLink>
+          <Link to={`/${slug}`}>{title}</Link>
         </Title>
         <Date>{date}</Date>
         <Summary>
-          <SummaryLink to="/">{summary}</SummaryLink>
+          <Link to={`/${slug}`}>{summary}</Link>
         </Summary>
         <TagList>
           {tags.map(tag => (
             <TagItem key={tag}>
-              <TagLink to={`/?tag=${tag}`}>{tag}</TagLink>
+              <Link to={`/?tag=${tag}`}>{tag}</Link>
             </TagItem>
           ))}
         </TagList>
       </Info>
       {thumbnailData && (
-        <Thumb>
-          <GatsbyImage image={thumbnailData} alt=""></GatsbyImage>
-        </Thumb>
+        <Thumbnail>
+          <Link to={`/${slug}`}>
+            <GatsbyImage image={thumbnailData} alt=""></GatsbyImage>
+          </Link>
+        </Thumbnail>
       )}
     </Wrapper>
   );

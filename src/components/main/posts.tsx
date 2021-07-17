@@ -11,8 +11,9 @@ type Props = {
 
 export type PostQlDataType = {
   node: {
-    frontmatter: PostType;
     id: string;
+    slug: string;
+    frontmatter: PostType;
   };
 };
 
@@ -36,11 +37,12 @@ function Posts({ allPosts, currentTag }: Props) {
       {posts.map(
         ({
           node: {
+            id,
+            slug,
             frontmatter: { ...props },
-            id: id,
           },
         }) => (
-          <PostItem key={id} {...props} />
+          <PostItem key={id} slug={slug} {...props} />
         )
       )}
     </PostList>

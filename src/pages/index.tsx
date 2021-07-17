@@ -90,14 +90,15 @@ function Home({ data, location }: Props) {
 
 export default Home;
 
-export const queryIndex = graphql`
-  query queryIndex {
+export const pageQuery = graphql`
+  query QueryPosts {
     allMdx(
       sort: { fields: [frontmatter___date, frontmatter___title], order: DESC }
     ) {
       edges {
         node {
           id
+          slug
           frontmatter {
             title
             date(formatString: "YYYY.MM.DD")
