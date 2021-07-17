@@ -140,17 +140,6 @@ function Home({ data }: Props) {
           </Section>
         </Left>
         <Right>
-          <Section title="categories">
-            <CategoryList>
-              {/* {categories.map(category => (
-                <CategoryItem
-                  key={category.heading}
-                  heading={category.heading}
-                  posts={category.posts}
-                />
-              ))} */}
-            </CategoryList>
-          </Section>
           <Section title="tags">
             <TagList>
               {/* {tags.map(tag => (
@@ -175,7 +164,7 @@ export const queryIndex = graphql`
         node {
           id
           frontmatter {
-            category
+            title
             date(formatString: "YYYY.MM.DD")
             summary
             tags
@@ -183,12 +172,11 @@ export const queryIndex = graphql`
               childImageSharp {
                 gatsbyImageData(
                   layout: FULL_WIDTH
-                  breakpoints: [576]
-                  aspectRatio: 1.47
+                  breakpoints: [576, 768]
+                  aspectRatio: 2.5
                 )
               }
             }
-            title
           }
         }
       }

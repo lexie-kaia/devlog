@@ -13,7 +13,7 @@ type Props = {
 
 const Container = styled.div`
   margin: 0 auto;
-  max-width: 1240px;
+  max-width: 1080px;
 
   @media screen and (min-width: 769px) {
     padding: 0 5rem;
@@ -36,7 +36,7 @@ function Layout({ children }: Props) {
           rel="stylesheet"
         />
       </Helmet>
-      <ThemeProvider theme={softLight}>
+      <ThemeProvider theme={hardLight}>
         <Globalstyles />
         <Container>
           <Header />
