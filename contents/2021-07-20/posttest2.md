@@ -1,9 +1,7 @@
 ---
-date: '2021-07-15'
-title: '포스트 테스트입니다 복사'
-category: '개츠비 블로그 만들기 복사'
-tags: ['html', 'css', javascript]
-summary: '이것은 포스트 테스트입니다. 리액트 개츠비 블로그를 만들어 봅시다. 복사'
+title: '포스트 테스트입니다'
+date: '2021-07-20'
+tags: ['html', 'css', 'javascript']
 ---
 
 # 1. Heading 1

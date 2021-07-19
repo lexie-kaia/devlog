@@ -2,16 +2,14 @@ import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import queryString from 'query-string';
-
 import Layout from '../components/common/layout';
 import Hero from '../components/main/hero';
 import Section from '../components/main/section';
-import Posts, { PostQlDataType } from '../components/main/posts';
-import Tags, { TagType } from '../components/main/tags';
+import PostList, { PostQlDataType } from '../components/main/postlist';
+import TagList, { TagType } from '../components/main/taglist';
 
 type Props = {
   location: {
-    path: string;
     search: string;
   };
   data: any;
@@ -75,12 +73,12 @@ function Home({ data, location }: Props) {
       <Main>
         <Left>
           <Section title="posts">
-            <Posts allPosts={allPosts} currentTag={currentTag}></Posts>
+            <PostList allPosts={allPosts} currentTag={currentTag}></PostList>
           </Section>
         </Left>
         <Right>
           <Section title="tags">
-            <Tags allTags={allTags} currentTag={currentTag}></Tags>
+            <TagList allTags={allTags} currentTag={currentTag}></TagList>
           </Section>
         </Right>
       </Main>
@@ -102,7 +100,6 @@ export const pageQuery = graphql`
           frontmatter {
             title
             date(formatString: "YYYY.MM.DD")
-            summary
             tags
             thumbnail {
               childImageSharp {

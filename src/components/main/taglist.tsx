@@ -12,13 +12,13 @@ export type TagType = {
   [k: string]: number;
 };
 
-const TagList = styled.ul`
+const Wrapper = styled.ul`
   padding: 1.5rem 0;
 `;
 
-function Tags({ currentTag, allTags }: Props) {
+function TagList({ currentTag, allTags }: Props) {
   return (
-    <TagList>
+    <Wrapper>
       {allTags &&
         Object.keys(allTags).map(tag => (
           <TagItem
@@ -28,8 +28,8 @@ function Tags({ currentTag, allTags }: Props) {
             currentTag={currentTag}
           />
         ))}
-    </TagList>
+    </Wrapper>
   );
 }
 
-export default Tags;
+export default TagList;

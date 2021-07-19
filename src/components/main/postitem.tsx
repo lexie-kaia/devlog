@@ -6,7 +6,6 @@ import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image';
 export type PostType = {
   title: string;
   date: string;
-  summary: string;
   tags: string[];
   thumbnail: ImageDataLike;
 };
@@ -22,9 +21,9 @@ const Wrapper = styled.li`
 const Info = styled.div``;
 
 const Title = styled.h3`
-  margin-bottom: 0.5rem;
-  font-size: 22px;
-  line-height: 28px;
+  margin-bottom: 0.75rem;
+  font-size: 28px;
+  line-height: 36px;
 
   a {
     &:hover,
@@ -37,24 +36,10 @@ const Title = styled.h3`
 `;
 
 const Date = styled.p`
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
   color: ${props => props.theme.color.textSub};
   font-size: 14px;
   line-height: 20px;
-`;
-
-const Summary = styled.p`
-  margin-bottom: 0.75rem;
-  font-size: 16px;
-  line-height: 24px;
-  color: ${props => props.theme.color.textSub};
-
-  a {
-    &:focus {
-      outline: none;
-      text-decoration: underline;
-    }
-  }
 `;
 
 const TagList = styled.ul`
@@ -93,9 +78,7 @@ const Thumbnail = styled.div`
   margin-top: 1.25rem;
 `;
 
-const ImageLink = styled(Link)``;
-
-function PostItem({ title, date, summary, tags, thumbnail, slug }: Props) {
+function PostItem({ title, date, tags, thumbnail, slug }: Props) {
   const thumbnailData = getImage(thumbnail);
 
   return (
@@ -105,9 +88,6 @@ function PostItem({ title, date, summary, tags, thumbnail, slug }: Props) {
           <Link to={`/${slug}`}>{title}</Link>
         </Title>
         <Date>{date}</Date>
-        <Summary>
-          <Link to={`/${slug}`}>{summary}</Link>
-        </Summary>
         <TagList>
           {tags.map(tag => (
             <TagItem key={tag}>

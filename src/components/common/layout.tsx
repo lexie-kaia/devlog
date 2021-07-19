@@ -36,7 +36,7 @@ function Layout({ children }: Props) {
           rel="stylesheet"
         />
       </Helmet>
-      <ThemeProvider theme={softLight}>
+      <ThemeProvider theme={hardDark}>
         <Globalstyles />
         <Container>
           <Header />

@@ -40,7 +40,7 @@ export const typo = {
 const MdxBodyStyles = styled.div`
   margin: 0 auto;
   max-width: 1080px;
-  padding: 5rem 1rem;
+  padding: 4rem 1rem;
   font-size: ${typo.body.fontSize};
   line-height: ${typo.body.lineHeight};
   font-weight: 400;

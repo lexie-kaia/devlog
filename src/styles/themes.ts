@@ -19,7 +19,7 @@ export const softDark = {
     backMain: '#202124',
     backSub: '#303134',
     line: '#3C4043',
-    textMain: '#c6c9ce',
+    textMain: '#ced0d5',
     textSub: '#969ba1',
     highlight: '#8ab4f8',
   },

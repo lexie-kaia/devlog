@@ -17,9 +17,9 @@ export type PostQlDataType = {
   };
 };
 
-const PostList = styled.ul``;
+const Wrapper = styled.ul``;
 
-function Posts({ allPosts, currentTag }: Props) {
+function PostList({ allPosts, currentTag }: Props) {
   const posts = useMemo(() => {
     return allPosts.filter((post: PostQlDataType) => {
       const {
@@ -33,7 +33,7 @@ function Posts({ allPosts, currentTag }: Props) {
   }, [currentTag]);
 
   return (
-    <PostList>
+    <Wrapper>
       {posts.map(
         ({
           node: {
@@ -45,8 +45,8 @@ function Posts({ allPosts, currentTag }: Props) {
           <PostItem key={id} slug={slug} {...props} />
         )
       )}
-    </PostList>
+    </Wrapper>
   );
 }
 
-export default Posts;
+export default PostList;
