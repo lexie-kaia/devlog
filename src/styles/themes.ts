@@ -19,7 +19,7 @@ export const softDark = {
     backMain: '#202124',
     backSub: '#303134',
     line: '#3C4043',
-    textMain: '#bdc1c6',
+    textMain: '#c6c9ce',
     textSub: '#969ba1',
     highlight: '#8ab4f8',
   },
@@ -31,8 +31,8 @@ export const hardLight = {
     backSub: '#fafafa',
     line: '#eaeaea',
     textMain: '#111111',
-    textSub: '#696969',
-    highlight: '#196fff',
+    textSub: '#666666',
+    highlight: '#146cff',
   },
 };
 
@@ -43,6 +43,6 @@ export const hardDark = {
     line: '#414141',
     textMain: '#ffffff',
     textSub: '#b2b2b2',
-    highlight: '#0060ff',
+    highlight: '#146cff',
   },
 };
