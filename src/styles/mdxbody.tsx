@@ -7,31 +7,16 @@ type Props = {
 
 export const typo = {
   h1: {
-    fontSize: '40px',
-    lineHeight: '56px',
-  },
-
-  h1Mobile: {
-    fontSize: '36px',
-    lineHeight: '48px',
-  },
-
-  h2: {
     fontSize: '32px',
     lineHeight: '40px',
   },
 
-  h2Mobile: {
+  h2: {
     fontSize: '28px',
-    lineHeight: '40px',
+    lineHeight: '36px',
   },
 
   h3: {
-    fontSize: '24px',
-    lineHeight: '32px',
-  },
-
-  h3Mobile: {
     fontSize: '22px',
     lineHeight: '32px',
   },
@@ -69,36 +54,21 @@ const MdxBodyStyles = styled.div`
   }
 
   h1 {
-    font-size: ${typo.h1Mobile.fontSize};
-    line-height: ${typo.h1Mobile.lineHeight};
-    margin-bottom: 0.75rem;
-
-    @media screen and (min-width: 768px) {
-      font-size: ${typo.h1.fontSize};
-      line-height: ${typo.h1.lineHeight};
-    }
+    font-size: ${typo.h1.fontSize};
+    line-height: ${typo.h1.lineHeight};
+    margin-bottom: 1rem;
   }
 
   h2 {
-    font-size: ${typo.h2Mobile.fontSize};
-    line-height: ${typo.h2Mobile.lineHeight};
+    font-size: ${typo.h2.fontSize};
+    line-height: ${typo.h2.lineHeight};
     margin-bottom: 0.75rem;
-
-    @media screen and (min-width: 768px) {
-      font-size: ${typo.h2.fontSize};
-      line-height: ${typo.h2.lineHeight};
-    }
   }
 
   h3 {
-    font-size: ${typo.h3Mobile.fontSize};
-    line-height: ${typo.h3Mobile.lineHeight};
+    font-size: ${typo.h3.fontSize};
+    line-height: ${typo.h3.lineHeight};
     margin-bottom: 0.5rem;
-
-    @media screen and (min-width: 768px) {
-      font-size: ${typo.h3.fontSize};
-      line-height: ${typo.h3.lineHeight};
-    }
   }
 
   h4 {

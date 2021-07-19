@@ -1,36 +1,40 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
+import LogoSvg from '../../assets/logosvg';
 
 const HeaderContainer = styled.header`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 4rem;
+  height: 5rem;
+  padding: 0 1rem;
   /* border: 1px solid red; */
 `;
 
-const Logo = styled.h1``;
-
 const LogoLink = styled(Link)`
-  font-family: 'Press Start 2P', cursive;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 28px;
+  margin-top: 0.5rem;
+
+  svg {
+    height: 1rem;
+    fill: ${props => props.theme.color.textMain};
+  }
 
   &:hover,
   &:focus {
     outline: none;
-    color: ${props => props.theme.color.highlight};
+    svg {
+      fill: ${props => props.theme.color.highlight};
+    }
   }
 `;
 
 function Header() {
   return (
     <HeaderContainer>
-      <Logo>
-        <LogoLink to="/">GG.LOG</LogoLink>
-      </Logo>
+      <LogoLink to="/">
+        <LogoSvg />
+      </LogoLink>
     </HeaderContainer>
   );
 }
