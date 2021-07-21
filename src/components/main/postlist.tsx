@@ -2,7 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled';
 import PostItem from './postitem';
 import { PostType } from './postitem';
-import { useMemo } from 'react';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
+// import { useMemo } from 'react';
 
 type Props = {
   allPosts: PostQlDataType[];
@@ -20,21 +21,11 @@ export type PostQlDataType = {
 const Wrapper = styled.ul``;
 
 function PostList({ allPosts, currentTag }: Props) {
-  const posts = useMemo(() => {
-    return allPosts.filter((post: PostQlDataType) => {
-      const {
-        node: {
-          frontmatter: { tags },
-        },
-      } = post;
-
-      return currentTag !== 'all' ? tags.includes(currentTag) : true;
-    });
-  }, [currentTag]);
+  const { containerRef, postList } = useInfiniteScroll(currentTag, allPosts);
 
   return (
-    <Wrapper>
-      {posts.map(
+    <Wrapper ref={containerRef}>
+      {postList.map(
         ({
           node: {
             id,
