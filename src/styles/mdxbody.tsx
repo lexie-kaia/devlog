@@ -40,7 +40,7 @@ export const typo = {
 const MdxBodyStyles = styled.div`
   margin: 0 auto;
   max-width: 1080px;
-  padding: 4rem 1rem;
+  padding: 5rem 1rem;
   font-size: ${typo.body.fontSize};
   line-height: ${typo.body.lineHeight};
   font-weight: 400;
@@ -82,7 +82,7 @@ const MdxBodyStyles = styled.div`
   }
 
   * + h2 {
-    margin-top: 3.5rem;
+    margin-top: 4rem;
   }
 
   * + h3 {
@@ -93,20 +93,13 @@ const MdxBodyStyles = styled.div`
     margin-top: 2rem;
   }
 
-  p strong:only-child {
-    display: block;
-    margin-top: 0.25rem;
-    margin-bottom: -0.25rem;
-    line-height: ${typo.h4.lineHeight};
-  }
-
   hr {
     border: 0;
     border-top: ${props => `1px solid ${props.theme.color.line}`};
   }
 
   p {
-    padding: 0.5rem 0;
+    padding: 0.25rem 0;
     color: ${props => props.theme.color.textMain};
   }
 
@@ -205,6 +198,10 @@ const MdxBodyStyles = styled.div`
   // pre, code
   div[class*='gatsby-highlight'] {
     margin: 1rem 0;
+  }
+
+  p > code {
+    word-break: break-all;
   }
 `;
 
