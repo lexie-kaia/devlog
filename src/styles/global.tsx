@@ -25,6 +25,7 @@ function Globalstyles() {
           color: ${theme.color.textMain};
           font-family: 'Spoqa Han Sans Neo', 'sans-serif';
           line-height: 1;
+          min-height: 100vh;
         }
 
         ul {
@@ -40,6 +41,7 @@ function Globalstyles() {
           border: 0;
           background: transparent;
           color: inherit;
+          font-family: 'Spoqa Han Sans Neo', 'sans-serif';
           font-size: inherit;
           cursor: pointer;
 
@@ -54,6 +56,7 @@ function Globalstyles() {
           border: 0;
           background: transparent;
           color: inherit;
+          font-family: 'Spoqa Han Sans Neo', 'sans-serif';
           font-size: inherit;
 
           &:focus {

@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
-import { Helmet } from 'react-helmet';
 import { ThemeProvider } from '@emotion/react';
 import styled from '@emotion/styled';
 import { softLight, softDark, hardLight, hardDark } from '../../styles/themes';
+import Fonts from '../../styles/fonts';
 import Globalstyles from '../../styles/global';
 import Header from './header';
 import Footer from './footer';
@@ -12,9 +12,13 @@ type Props = {
 };
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 0 auto;
   max-width: 1080px;
-
+  height: 100%;
+  min-height: 100vh;
   @media screen and (min-width: 769px) {
     padding: 0 5rem;
   }
@@ -23,20 +27,8 @@ const Container = styled.div`
 function Layout({ children }: Props) {
   return (
     <>
-      <Helmet>
-        <link
-          href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
-          rel="stylesheet"
-          type="text/css"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
-          rel="stylesheet"
-        />
-      </Helmet>
-      <ThemeProvider theme={hardDark}>
+      <Fonts />
+      <ThemeProvider theme={softLight}>
         <Globalstyles />
         <Container>
           <Header />
