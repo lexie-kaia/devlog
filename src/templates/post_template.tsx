@@ -4,6 +4,8 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import Layout from '../components/common/layout';
 import MdxBody from '../styles/mdxbody';
 import PostHeader from '../components/main/postheader';
+import Commentwidget from '../services/commentwidget';
+import Comments from '../components/main/comments';
 
 type Props = {
   data: any;
@@ -23,6 +25,9 @@ function PostTemplate({ data }: Props) {
       <MdxBody>
         <MDXRenderer>{body}</MDXRenderer>
       </MdxBody>
+      <Comments>
+        <Commentwidget />
+      </Comments>
     </Layout>
   );
 }
