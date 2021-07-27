@@ -1,29 +1,43 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
-import { GatsbyImage, getImage, ImageDataLike } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { PostFrontMatterType } from '../../types';
 
-export type PostType = {
-  title: string;
-  date: string;
-  tags: string[];
-  thumbnail: ImageDataLike;
-};
-
-type Props = PostType & { slug: string };
+type Props = PostFrontMatterType & { slug: string };
 
 const Wrapper = styled.li`
   padding: 1.5rem 0;
-  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
-  transition: background 300ms ease-in-out;
+  &:not(:last-child) {
+    border-bottom: ${props => `1px solid ${props.theme.color.line}`};
+  }
 `;
 
-const Info = styled.div``;
+const Info = styled.div`
+  width: 100%;
+`;
+
+const Category = styled.p`
+  margin-bottom: 0.25rem;
+  color: ${props => props.theme.color.highlight};
+  font-size: 16px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-weight: 500;
+
+  a {
+    &:hover,
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+  }
+`;
 
 const Title = styled.h3`
   margin-bottom: 0.75rem;
-  font-size: 28px;
-  line-height: 36px;
+  font-size: 32px;
+  line-height: 40px;
 
   a {
     &:hover,
@@ -46,20 +60,19 @@ const TagList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: -0.25rem;
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+  color: ${props => props.theme.color.textSub};
 `;
 
 const TagItem = styled.li`
   margin: 0 0.25rem 0.25rem 0;
-  font-size: 14px;
-  line-height: 20px;
-  text-transform: uppercase;
 
   a {
     &:before {
       content: '#';
     }
-
-    color: ${props => props.theme.color.highlight};
 
     &:hover,
     &:focus {
@@ -78,15 +91,19 @@ const Thumbnail = styled.div`
   margin-top: 1.25rem;
 `;
 
-function PostItem({ title, date, tags, thumbnail, slug }: Props) {
-  const thumbnailData = getImage(thumbnail);
-
+function PostItem({ title, category, date, tags, thumbnail, slug }: Props) {
   return (
     <Wrapper>
       <Info>
+        <Category>
+          <Link to={`/?category=${category}`}>
+            {category.replace(/\-/g, ' · ')}
+          </Link>
+        </Category>
         <Title>
           <Link to={`/${slug}`}>{title}</Link>
         </Title>
+
         <Date>{date}</Date>
         <TagList>
           {tags.map(tag => (
@@ -96,15 +113,18 @@ function PostItem({ title, date, tags, thumbnail, slug }: Props) {
           ))}
         </TagList>
       </Info>
-      {thumbnailData && (
-        <Thumbnail>
-          <Link to={`/${slug}`}>
-            <GatsbyImage image={thumbnailData} alt=""></GatsbyImage>
-          </Link>
-        </Thumbnail>
-      )}
     </Wrapper>
   );
 }
 
 export default PostItem;
+
+// const thumbnailData = getImage(thumbnail);
+
+// {thumbnailData && (
+//         <Thumbnail>
+//           <Link to={`/${slug}`}>
+//             <GatsbyImage image={thumbnailData} alt=""></GatsbyImage>
+//           </Link>
+//         </Thumbnail>
+//       )}

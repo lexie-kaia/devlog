@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
+import * as queryStringParser from 'query-string';
 import Section from './section';
 import MenuList from './home-menulist';
 import { QueryStringType, PostType } from '../../types';
 import Footer from '../common/footer';
-import PostList from './home-postlist';
+import PostList from './postlist';
 
 type Props = {
   allPosts: any;
@@ -42,15 +43,9 @@ const RightColumn = styled.div`
   }
 `;
 
-const LeftContents = styled.div`
-  /* border: 1px solid red; */
-`;
+const LeftContents = styled.div``;
 
-const RightContents = styled.div`
-  /* max-width: 720px; */
-  /* width: 100%; */
-  /* border: 1px solid red; */
-`;
+const RightContents = styled.div``;
 
 function Main({ allPosts, queryString }: Props) {
   const { categoryList, tagList } = useMemo(() => {
@@ -85,6 +80,40 @@ function Main({ allPosts, queryString }: Props) {
     return { categoryList, tagList };
   }, []);
 
+  const postList = useMemo(() => {
+    const query = queryStringParser.parse(queryString);
+    const queryCategory = query.category ? query.category : '';
+    const queryTags = query.tag
+      ? typeof query.tag === 'string'
+        ? [query.tag]
+        : query.tag
+      : [];
+
+    return allPosts.filter((post: PostType) => {
+      const {
+        node: {
+          frontmatter: { category: postCategory, tags: postTags },
+        },
+      } = post;
+
+      if (queryCategory === '' && queryTags === []) return true;
+
+      if (queryCategory) {
+        if (postCategory !== queryCategory) return false;
+      }
+
+      if (queryTags.length !== 0) {
+        for (let i = 0; i < queryTags.length; i++) {
+          if (!postTags.includes(queryTags[i])) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
+  }, [queryString]);
+
   return (
     <Container>
       <LeftColumn>
@@ -109,7 +138,7 @@ function Main({ allPosts, queryString }: Props) {
       <RightColumn>
         <RightContents>
           <Section title="posts">
-            <PostList allPosts={allPosts} queryString={queryString} />
+            <PostList postList={postList} queryString={queryString} />
           </Section>
         </RightContents>
       </RightColumn>
