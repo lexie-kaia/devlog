@@ -11,6 +11,7 @@ export const softLight = {
     textMain: '#363a3c',
     textSub: '#878d91',
     highlight: '#4c80f1',
+    shadow: 'rgba(54, 58, 60, 0.1)',
   },
 };
 
@@ -22,6 +23,7 @@ export const softDark = {
     textMain: '#ced0d5',
     textSub: '#969ba1',
     highlight: '#8ab4f8',
+    shadow: 'rgba(206, 208, 213, 0.15)',
   },
 };
 
@@ -33,6 +35,7 @@ export const hardLight = {
     textMain: '#111111',
     textSub: '#666666',
     highlight: '#146cff',
+    shadow: 'rgba(17, 17, 17, 0.1)',
   },
 };
 
@@ -44,5 +47,6 @@ export const hardDark = {
     textMain: '#ffffff',
     textSub: '#b2b2b2',
     highlight: '#146cff',
+    shadow: 'rgba(255, 255, 255, 0.15)',
   },
 };
