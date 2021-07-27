@@ -4,8 +4,6 @@ import styled from '@emotion/styled';
 import { softLight, softDark, hardLight, hardDark } from '../../styles/themes';
 import Fonts from '../../styles/fonts';
 import Globalstyles from '../../styles/global';
-import Header from './header';
-import Footer from './footer';
 
 type Props = {
   children: ReactNode;
@@ -16,12 +14,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 1080px;
-  height: 100%;
   min-height: 100vh;
-  @media screen and (min-width: 769px) {
-    padding: 0 5rem;
-  }
+  height: 100%;
+  background: ${props => props.theme.color.backMain};
 `;
 
 function Layout({ children }: Props) {
@@ -30,11 +25,7 @@ function Layout({ children }: Props) {
       <Fonts />
       <ThemeProvider theme={softLight}>
         <Globalstyles />
-        <Container>
-          <Header />
-          {children}
-          <Footer />
-        </Container>
+        <Container>{children}</Container>
       </ThemeProvider>
     </>
   );

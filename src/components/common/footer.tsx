@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Github, Google } from 'react-bootstrap-icons';
 
 const FooterContainer = styled.footer`
   display: flex;
