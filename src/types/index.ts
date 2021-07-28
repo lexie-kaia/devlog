@@ -2,7 +2,7 @@ import { ImageDataLike } from 'gatsby-plugin-image';
 
 export type QueryStringType = string;
 
-export type AllPostsType = PostType[];
+export type PostsType = PostType[];
 
 export type PostType = {
   node: {
@@ -19,3 +19,5 @@ export type PostFrontMatterType = {
   tags: string[];
   thumbnail?: ImageDataLike;
 };
+
+export type PostListStyleType = 'block' | 'list';

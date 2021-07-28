@@ -3,30 +3,30 @@ import styled from '@emotion/styled';
 import * as queryStringParser from 'query-string';
 import Section from './section';
 import MenuList from './home-menulist';
-import { QueryStringType, PostType } from '../../types';
+import PostSection from './postsection';
 import Footer from '../common/footer';
-import PostList from './postlist';
+import { QueryStringType, PostType, PostsType } from '../../types';
 
 type Props = {
-  allPosts: any;
+  allPosts: PostsType;
   queryString: QueryStringType;
 };
 
 const Container = styled.div`
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   min-height: calc(100vh - 5rem);
   max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   @media screen and (min-width: 577px) {
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
   }
   @media screen and (min-width: 769px) {
     display: flex;
-    padding: 1rem 3rem;
+    padding: 1.5rem 3rem;
   }
   @media screen and (min-width: 961px) {
-    padding: 1rem 4rem;
+    padding: 1.5rem 4rem;
   }
 `;
 
@@ -137,9 +137,7 @@ function Main({ allPosts, queryString }: Props) {
       </LeftColumn>
       <RightColumn>
         <RightContents>
-          <Section title="posts">
-            <PostList postList={postList} queryString={queryString} />
-          </Section>
+          <PostSection postList={postList} queryString={queryString} />
         </RightContents>
       </RightColumn>
     </Container>

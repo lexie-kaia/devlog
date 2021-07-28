@@ -1,7 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 import { ChevronUp } from 'react-bootstrap-icons';
-import { useState } from 'react';
 
 type Props = {
   children: ReactNode;
@@ -9,13 +8,16 @@ type Props = {
   isAccordion?: boolean;
 };
 
-const Container = styled.section``;
+const Container = styled.section`
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+`;
 
 const Header = styled.div`
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 `;
 
 const Body = styled.div<{ isOpen: boolean }>`
@@ -34,13 +36,14 @@ const UpButton = styled.button<{ isOpen: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 24px;
-  height: 24px;
+  width: 2rem;
+  height: 2rem;
   transform: ${props => (props.isOpen ? 'rotate(0)' : 'rotate(180deg)')};
-  /* transition: transform 250ms ease-out; */
 
   svg {
     fill: ${props => props.theme.color.textMain};
+    stroke: ${props => props.theme.color.textMain};
+    stroke-width: 1px;
     width: 16px;
     height: 16px;
   }
@@ -51,6 +54,7 @@ const UpButton = styled.button<{ isOpen: boolean }>`
 
     svg {
       fill: ${props => props.theme.color.highlight};
+      stroke: ${props => props.theme.color.highlight};
     }
   }
 `;
