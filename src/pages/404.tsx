@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Layout from '../components/common/layout';
+import Layout from '../components/layout/layout';
 import { Link } from 'gatsby';
 
 const Container = styled.div`
@@ -40,7 +40,7 @@ const HomeLink = styled(Link)`
 
 function NotFound() {
   return (
-    <Layout>
+    <Layout layoutType={'fullPage'}>
       <Container>
         <Title>404</Title>
         <Subtitle>Page Not Found</Subtitle>
