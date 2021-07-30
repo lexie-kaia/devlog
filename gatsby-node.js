@@ -12,9 +12,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             order: DESC
           }
         ) {
-          nodes {
-            slug
-            id
+          edges {
+            node {
+              id
+              slug
+              frontmatter {
+                category
+              }
+            }
+            next {
+              id
+            }
+            previous {
+              id
+            }
           }
         }
       }
@@ -29,16 +40,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
 
-  const posts = result.data.allMdx.nodes;
   const postTemplate = path.resolve(`./src/templates/post_template.tsx`);
+  const posts = result.data.allMdx.edges;
 
   if (posts.length > 0) {
-    posts.forEach((post, index) => {
+    posts.forEach(post => {
       createPage({
-        path: post.slug,
+        path: post.node.slug,
         component: postTemplate,
         context: {
-          id: post.id,
+          id: post.node.id,
+          category: post.node.frontmatter.category,
+          nextId: post.next?.id,
+          prevId: post.previous?.id,
         },
       });
     });
