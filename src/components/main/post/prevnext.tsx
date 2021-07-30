@@ -42,7 +42,7 @@ const IconLink = styled(Link)`
     height: 10px;
     fill: ${props => props.theme.color.textSub};
     stroke: ${props => props.theme.color.textSub};
-    stroke-width: 1px;
+    stroke-width: 1.5px;
   }
 
   &:hover,

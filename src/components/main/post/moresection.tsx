@@ -120,7 +120,7 @@ const ButtonText = styled.div`
 
 function MoreSection({ postCategory, moreList, postId }: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(true);
-  const [listLength, setListlength] = useState<number>(5);
+  const [listLength, setListlength] = useState<number>(3);
 
   const onOpenButtonClick = () => {
     if (isOpen) {
