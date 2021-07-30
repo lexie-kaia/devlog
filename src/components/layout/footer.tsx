@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import ContentsArea from './contentsarea';
 
-const FooterContainer = styled.footer`
+const Container = styled.footer`
+  background: ${props => props.theme.color.backSub};
+`;
+
+const Contents = styled(ContentsArea)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
   height: 5rem;
   color: ${props => props.theme.color.textSub};
   font-size: 14px;
@@ -36,13 +40,15 @@ function Footer() {
   };
 
   return (
-    <FooterContainer>
-      <Copyright>© {getYear()} GG.LOG all rights reserved.</Copyright>
-      <Contact>
-        <Anchor href="mailto:kaia.gayeon.kim@gmail.com">Mail</Anchor>
-        <Anchor href="https://github.com/lexie-kaia">Github</Anchor>
-      </Contact>
-    </FooterContainer>
+    <Container>
+      <Contents>
+        <Copyright>© {getYear()} GG.LOG all rights reserved.</Copyright>
+        <Contact>
+          <Anchor href="mailto:kaia.gayeon.kim@gmail.com">Mail</Anchor>
+          <Anchor href="https://github.com/lexie-kaia">Github</Anchor>
+        </Contact>
+      </Contents>
+    </Container>
   );
 }
 

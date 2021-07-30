@@ -30,7 +30,7 @@ export const softDark = {
 export const hardLight = {
   color: {
     backMain: '#ffffff',
-    backSub: '#fafafa',
+    backSub: '#f7f8f9',
     line: '#eaeaea',
     textMain: '#111111',
     textSub: '#666666',

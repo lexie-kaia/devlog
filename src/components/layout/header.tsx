@@ -3,35 +3,23 @@ import styled from '@emotion/styled';
 import { Link } from 'gatsby';
 import LogoXSvg from '../../assets/logo-x-svg';
 import LogoWordSvg from '../../assets/logo-word-svg';
+import ContentsArea from './contentsarea';
 
 const Container = styled.header`
   border-bottom: ${props => `1px solid ${props.theme.color.line}`};
   box-shadow: ${props => `0 0 10px ${props.theme.color.shadow}`};
 `;
 
-const Contents = styled.div`
+const Contents = styled(ContentsArea)`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  max-width: 1440px;
-  width: 100%;
   height: 5rem;
-  margin: 0 auto;
-  padding: 0 1rem;
-  @media screen and (min-width: 577px) {
-    padding: 0 2rem;
-  }
-  @media screen and (min-width: 769px) {
-    padding: 0 3rem;
-  }
-  @media screen and (min-width: 961px) {
-    padding: 0 4rem;
-  }
 `;
 
 const Logo = styled.div``;
 
-const SvgWrapper = styled.div`
+const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
 
@@ -58,7 +46,10 @@ const SvgWrapper = styled.div`
     }
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
+
     div[class='logo-symbol'] {
       background: ${props => props.theme.color.highlight};
       svg {
@@ -79,16 +70,14 @@ function Header() {
     <Container>
       <Contents>
         <Logo>
-          <Link to="/">
-            <SvgWrapper>
-              <div className="logo-symbol">
-                <LogoXSvg />
-              </div>
-              <div className="logo-word">
-                <LogoWordSvg />
-              </div>
-            </SvgWrapper>
-          </Link>
+          <LogoLink to="/">
+            <div className="logo-symbol">
+              <LogoXSvg />
+            </div>
+            <div className="logo-word">
+              <LogoWordSvg />
+            </div>
+          </LogoLink>
         </Logo>
       </Contents>
     </Container>
