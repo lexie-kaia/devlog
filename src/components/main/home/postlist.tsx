@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import PostItem from './postitem';
-import { PostListStyleType, PostsType, QueryStringType } from '../../types';
+import { PostListStyleType, PostsType, QueryStringType } from '../../../types';
 
 type Props = {
   postList: PostsType;
@@ -45,14 +45,9 @@ function PostList({ postList, queryString, postListStyle }: Props) {
 
   return (
     <Container ref={containerRef}>
-      {postList.slice(0, page * NUMBER_OF_ITEMS_PER_PAGE).map(
-        ({
-          node: {
-            id,
-            slug,
-            frontmatter: { ...props },
-          },
-        }) => {
+      {postList
+        .slice(0, page * NUMBER_OF_ITEMS_PER_PAGE)
+        .map(({ id, slug, frontmatter: { ...props } }) => {
           return (
             <PostItem
               key={id}
@@ -61,8 +56,7 @@ function PostList({ postList, queryString, postListStyle }: Props) {
               postListStyle={postListStyle}
             />
           );
-        }
-      )}
+        })}
     </Container>
   );
 }

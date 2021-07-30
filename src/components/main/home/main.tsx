@@ -1,32 +1,24 @@
 import React, { useMemo } from 'react';
 import styled from '@emotion/styled';
 import * as queryStringParser from 'query-string';
-import Section from './section';
-import MenuList from './home-menulist';
+// components
+import Section from '../../common/section';
+import MenuList from './menulist';
 import PostSection from './postsection';
-import Footer from '../common/footer';
-import { QueryStringType, PostType, PostsType } from '../../types';
+import ContentsArea from '../../layout/contentsarea';
+// types
+import { QueryStringType, PostType, PostsType } from '../../../types';
 
 type Props = {
   allPosts: PostsType;
   queryString: QueryStringType;
 };
 
-const Container = styled.div`
-  padding: 1.5rem 1rem;
-  min-height: calc(100vh - 5rem);
+const Container = styled(ContentsArea)`
+  margin: 1.5rem auto;
   max-width: 1440px;
-  width: 100%;
-  margin: 0 auto;
-  @media screen and (min-width: 577px) {
-    padding: 1.5rem 2rem;
-  }
   @media screen and (min-width: 769px) {
     display: flex;
-    padding: 1.5rem 3rem;
-  }
-  @media screen and (min-width: 961px) {
-    padding: 1.5rem 4rem;
   }
 `;
 
@@ -43,10 +35,6 @@ const RightColumn = styled.div`
   }
 `;
 
-const LeftContents = styled.div``;
-
-const RightContents = styled.div``;
-
 function Main({ allPosts, queryString }: Props) {
   const { categoryList, tagList } = useMemo(() => {
     const categoryList = new Map();
@@ -55,9 +43,7 @@ function Main({ allPosts, queryString }: Props) {
 
     allPosts.forEach((post: PostType) => {
       const {
-        node: {
-          frontmatter: { category, tags },
-        },
+        frontmatter: { category, tags },
       } = post;
 
       if (!categoryList.has(category)) {
@@ -91,9 +77,7 @@ function Main({ allPosts, queryString }: Props) {
 
     return allPosts.filter((post: PostType) => {
       const {
-        node: {
-          frontmatter: { category: postCategory, tags: postTags },
-        },
+        frontmatter: { category: postCategory, tags: postTags },
       } = post;
 
       if (queryCategory === '' && queryTags === []) return true;
@@ -117,28 +101,23 @@ function Main({ allPosts, queryString }: Props) {
   return (
     <Container>
       <LeftColumn>
-        <LeftContents>
-          <Section title="categories" isAccordion={true}>
-            <MenuList
-              menuType="category"
-              menuList={categoryList}
-              queryString={queryString}
-            />
-          </Section>
-          <Section title="tags" isAccordion={true}>
-            <MenuList
-              menuType="tag"
-              menuList={tagList}
-              queryString={queryString}
-            />
-          </Section>
-          {/* <Footer /> */}
-        </LeftContents>
+        <Section title="categories" isAccordion={true}>
+          <MenuList
+            menuType="category"
+            menuList={categoryList}
+            queryString={queryString}
+          />
+        </Section>
+        <Section title="tags" isAccordion={true}>
+          <MenuList
+            menuType="tag"
+            menuList={tagList}
+            queryString={queryString}
+          />
+        </Section>
       </LeftColumn>
       <RightColumn>
-        <RightContents>
-          <PostSection postList={postList} queryString={queryString} />
-        </RightContents>
+        <PostSection postList={postList} queryString={queryString} />
       </RightColumn>
     </Container>
   );

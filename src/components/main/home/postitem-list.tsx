@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
+// components
 import { Link } from 'gatsby';
-import { PostFrontMatterType } from '../../types';
+import Tag from '../../common/tag';
+// types
+import { PostFrontMatterType } from '../../../types';
 
 type Props = PostFrontMatterType & { slug: string };
-
-const Container = styled.li`
-  padding: 1.5rem 0;
-`;
 
 const Title = styled.h3`
   margin-bottom: 0.25rem;
@@ -31,10 +30,10 @@ const Metadata = styled.div`
 
 const Category = styled.span`
   color: ${props => props.theme.color.highlight};
+  font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
-  font-weight: 500;
 
   a {
     &:hover,
@@ -61,34 +60,9 @@ const Date = styled.span`
   }
 `;
 
-const TagList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 14px;
-  line-height: 20px;
-  text-transform: uppercase;
-  color: ${props => props.theme.color.textSub};
-`;
-
-const TagItem = styled.li`
-  margin-right: 0.25rem;
-
-  a {
-    &:before {
-      content: '#';
-    }
-
-    &:hover,
-    &:focus {
-      outline: none;
-      text-decoration: underline;
-    }
-  }
-`;
-
 function PostItemList({ category, title, date, tags, slug }: Props) {
   return (
-    <Container>
+    <>
       <Title>
         <Link to={`/${slug}`}>{title}</Link>
       </Title>
@@ -99,15 +73,9 @@ function PostItemList({ category, title, date, tags, slug }: Props) {
           </Link>
         </Category>
         <Date>{date}</Date>
-        <TagList>
-          {tags.map(tag => (
-            <TagItem key={tag}>
-              <Link to={`/?tag=${tag}`}>{tag}</Link>
-            </TagItem>
-          ))}
-        </TagList>
+        <Tag tags={tags} />
       </Metadata>
-    </Container>
+    </>
   );
 }
 

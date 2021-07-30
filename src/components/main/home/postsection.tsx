@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+// components
 import PostList from './postlist';
-import IconBlock from '../../assets/icons/icon-block';
-import IconList from '../../assets/icons/icon-list';
-import { PostListStyleType, PostsType, QueryStringType } from '../../types';
+import IconBlock from '../../../assets/icons/icon-block';
+import IconList from '../../../assets/icons/icon-list';
+// types
+import { PostListStyleType, PostsType, QueryStringType } from '../../../types';
 
 type Props = {
   postList: PostsType;
@@ -22,8 +24,8 @@ const Header = styled.div`
 const Body = styled.div``;
 
 const Title = styled.h2`
-  font-size: 16px;
   font-weight: 700;
+  font-size: 16px;
   line-height: 24px;
   text-transform: uppercase;
 `;
@@ -39,8 +41,8 @@ const PostListStyleButton = styled.button<{ isClicked: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 2rem;
-  width: 2rem;
+  height: 32px;
+  width: 32px;
 
   svg {
     width: 16px;

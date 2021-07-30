@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MenuItem from './home-menuitem';
-import { QueryStringType } from '../../types';
+// components
+import MenuItem from './menuitem';
+// types
+import { MenuListType, MenuTypeType, QueryStringType } from '../../../types';
 
 type Props = {
-  menuType: 'category' | 'tag';
-  menuList: Map<string, number>;
+  menuType: MenuTypeType;
+  menuList: MenuListType;
   queryString: QueryStringType;
 };
 

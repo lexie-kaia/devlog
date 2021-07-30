@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
+// components
 import { ChevronUp } from 'react-bootstrap-icons';
 
 type Props = {
@@ -25,19 +26,14 @@ const Body = styled.div<{ isOpen: boolean }>`
 `;
 
 const Title = styled.h2`
-  font-size: 16px;
   font-weight: 700;
+  font-size: 16px;
   line-height: 24px;
   text-transform: uppercase;
 `;
 
-const UpButton = styled.button<{ isOpen: boolean }>`
-  margin-left: 0.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 2rem;
+const OpenButton = styled.button<{ isOpen: boolean }>`
+  margin-left: 0.75rem;
   transform: ${props => (props.isOpen ? 'rotate(0)' : 'rotate(180deg)')};
 
   svg {
@@ -51,12 +47,19 @@ const UpButton = styled.button<{ isOpen: boolean }>`
   &:focus,
   &:hover {
     outline: none;
-
     svg {
       fill: ${props => props.theme.color.highlight};
       stroke: ${props => props.theme.color.highlight};
     }
   }
+`;
+
+const ButtonIcon = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
 `;
 
 function Section({ children, title, isAccordion }: Props) {
@@ -75,9 +78,11 @@ function Section({ children, title, isAccordion }: Props) {
       <Header>
         <Title>{title}</Title>
         {isAccordion && (
-          <UpButton onClick={onClick} isOpen={isOpen}>
-            <ChevronUp />
-          </UpButton>
+          <OpenButton onClick={onClick} isOpen={isOpen}>
+            <ButtonIcon>
+              <ChevronUp />
+            </ButtonIcon>
+          </OpenButton>
         )}
       </Header>
       <Body isOpen={isOpen}>{children}</Body>

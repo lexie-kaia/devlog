@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
+// components
 import { Link } from 'gatsby';
-import { QueryStringType } from '../../types';
 import { X } from 'react-bootstrap-icons';
+// types
+import { MenuTypeType, QueryStringType } from '../../../types';
 
 type Props = {
-  menuType: 'category' | 'tag';
+  menuType: MenuTypeType;
   menuItem: string;
   count: number;
   queryString: QueryStringType;
@@ -41,9 +43,10 @@ const XLink = styled(Link)`
   justify-content: center;
   align-items: center;
   margin-left: 0.25rem;
-  border-radius: 10px;
   width: 20px;
   height: 20px;
+  border-radius: 10px;
+
   svg {
     fill: ${props => props.theme.color.highlight};
     width: 20px;
