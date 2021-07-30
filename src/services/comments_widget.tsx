@@ -1,4 +1,11 @@
 import React, { useRef, useEffect } from 'react';
+import styled from '@emotion/styled';
+
+const Container = styled.div`
+  div[class='utterances'] {
+    max-width: 100% !important;
+  }
+`;
 
 function Commentwidget() {
   const divRef = useRef<HTMLDivElement>(null);
@@ -23,7 +30,7 @@ function Commentwidget() {
 
     divRef.current.appendChild(utterances);
   }, []);
-  return <div ref={divRef} />;
+  return <Container ref={divRef} />;
 }
 
 export default Commentwidget;
