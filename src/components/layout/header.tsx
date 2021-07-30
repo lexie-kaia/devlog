@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'gatsby';
-import LogoXSvg from '../../assets/logo-x-svg';
-import LogoWordSvg from '../../assets/logo-word-svg';
+import LogoXSvg from '../../assets/logo/logo-x-svg';
+import LogoWordSvg from '../../assets/logo/logo-word-svg';
 import ContentsArea from './contentsarea';
 
 const Container = styled.header`
