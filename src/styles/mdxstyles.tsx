@@ -37,10 +37,7 @@ export const typo = {
   },
 };
 
-const MdxBodyStyles = styled.div`
-  margin: 0 auto;
-  max-width: 1080px;
-  padding: 5rem 1rem;
+const MdxBody = styled.div`
   font-size: ${typo.body.fontSize};
   line-height: ${typo.body.lineHeight};
   font-weight: 400;
@@ -205,8 +202,8 @@ const MdxBodyStyles = styled.div`
   }
 `;
 
-function MdxBody({ children }: Props) {
-  return <MdxBodyStyles>{children}</MdxBodyStyles>;
+function MdxStyles({ children }: Props) {
+  return <MdxBody>{children}</MdxBody>;
 }
 
-export default MdxBody;
+export default MdxStyles;
