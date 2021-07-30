@@ -17,7 +17,32 @@ export type PostFrontMatterType = {
   date: string;
   category: string;
   tags: string[];
-  thumbnail?: ImageDataLike;
+  // thumbnail?: ImageDataLike;
 };
 
 export type PostListStyleType = 'block' | 'list';
+
+export type TocType = {
+  title?: string;
+  url?: string;
+  items?: TocType[];
+};
+
+export type PrevNextPostType = {
+  frontmatter: {
+    title: string;
+  };
+  slug: string;
+};
+
+export type MorePostType = {
+  id: string;
+  slug: string;
+  frontmatter: MorePostFrontMatterType;
+};
+
+export type MorePostFrontMatterType = {
+  title: string;
+  date: string;
+  tags: string[];
+};
