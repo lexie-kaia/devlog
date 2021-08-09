@@ -34,7 +34,7 @@ const PostListStyleButtons = styled.div`
   display: flex;
   align-items: center;
   border-radius: 0.5rem;
-  box-shadow: ${props => `0 0 4px ${props.theme.color.shadow}`};
+  box-shadow: 0 0 2px var(--shadow);
 `;
 
 const PostListStyleButton = styled.button<{ isClicked: boolean }>`
@@ -43,35 +43,30 @@ const PostListStyleButton = styled.button<{ isClicked: boolean }>`
   align-items: center;
   height: 32px;
   width: 32px;
+  border: 1px solid var(--line);
 
   svg {
     width: 16px;
     height: 16px;
     fill: ${props =>
-      props.isClicked
-        ? props.theme.color.highlight
-        : props.theme.color.textSub};
+      props.isClicked ? `var(--highlight)` : `var(--text-second)`};
     stroke: ${props =>
-      props.isClicked
-        ? props.theme.color.highlight
-        : props.theme.color.textSub};
+      props.isClicked ? `var(--highlight)` : `var(--text-second)`};
   }
 
   &:hover,
   &:focus {
     outline: none;
-    border: ${props => `1px solid ${props.theme.color.highlight}`};
-
+    border: 1px solid var(--highlight);
     svg {
-      fill: ${props => props.theme.color.highlight};
-      stroke: ${props => props.theme.color.highlight};
+      fill: var(--highlight);
+      stroke: var(--highlight);
     }
   }
 `;
 
 const BlockButton = styled(PostListStyleButton)<{ isClicked: boolean }>`
   border-radius: 0.25rem 0 0 0.25rem;
-  border: ${props => `1px solid ${props.theme.color.line}`};
   svg {
     stroke-width: 1px;
   }
@@ -79,8 +74,7 @@ const BlockButton = styled(PostListStyleButton)<{ isClicked: boolean }>`
 
 const ListButton = styled(PostListStyleButton)<{ isClicked: boolean }>`
   border-radius: 0 0.25rem 0.25rem 0;
-  border: ${props => `1px solid ${props.theme.color.line}`};
-  border-left: ${props => `1px solid ${props.theme.color.backMain}`};
+  border-left: 1px solid var(--back-main);
   svg {
     stroke-width: 2px;
   }

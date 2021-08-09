@@ -1,5 +1,3 @@
-import './src/styles/prismcustom.css';
-
 import React from 'react';
 import ThemeProvider from './src/store/theme_provider';
 import GlobalComponent from './src/components/global/global-component';

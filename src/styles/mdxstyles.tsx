@@ -92,12 +92,12 @@ const MdxBody = styled.div`
 
   hr {
     border: 0;
-    border-top: ${props => `1px solid ${props.theme.color.line}`};
+    border-top: 1px solid var(--line);
   }
 
   p {
     padding: 0.25rem 0;
-    color: ${props => props.theme.color.textMain};
+    color: var(--text-prime);
   }
 
   hr + p {
@@ -131,38 +131,38 @@ const MdxBody = styled.div`
   }
 
   a {
-    color: ${props => props.theme.color.textSub};
+    color: var(--text-second);
     text-decoration: underline;
 
     &:focus,
     &:hover {
       outline: none;
-      color: ${props => props.theme.color.highlight};
+      color: var(--highlight);
     }
   }
 
   blockquote {
     margin: 1rem 0;
     padding: 0.5rem 1rem;
-    border-left: ${props => `4px solid ${props.theme.color.line}`};
-    background: ${props => props.theme.color.backSub};
+    border-left: 4px solid var(--line);
+    background: var(--back-sub);
   }
 
   table {
     margin: 1rem 0;
     width: 100%;
     border-collapse: collapse;
-    border-top: ${props => `1px solid ${props.theme.color.line}`};
+    border-top: 1px solid var(--line);
   }
 
   th {
     font-weight: 500;
-    background: ${props => props.theme.color.backSub};
+    background: var(--back-sub);
   }
 
   th,
   td {
-    border-bottom: ${props => `1px solid ${props.theme.color.line}`};
+    border-bottom: 1px solid var(--line);
     padding: 0.375rem 1rem;
   }
 
@@ -183,7 +183,7 @@ const MdxBody = styled.div`
     &:hover {
       outline: none;
       text-decoration: underline;
-      color: ${props => props.theme.color.highlight};
+      color: var(--highlight);
     }
   }
 

@@ -14,12 +14,12 @@ const ShareButton = styled.button`
   svg {
     width: 20px;
     height: 20px;
-    fill: ${props => props.theme.color.textSub};
+    fill: var(--text-second);
   }
 
   &:hover {
     svg {
-      fill: ${props => props.theme.color.highlight};
+      fill: var(--highlight);
     }
   }
 `;
@@ -28,13 +28,13 @@ const FacebookButton = styled(ShareButton)``;
 const TwitterButton = styled(ShareButton)``;
 const LinkButton = styled(ShareButton)`
   svg {
-    stroke: ${props => props.theme.color.textSub};
+    stroke: var(--text-second);
     stroke-width: 0.5px;
   }
 
   &:hover {
     svg {
-      stroke: ${props => props.theme.color.highlight};
+      stroke: var(--highlight);
     }
   }
 `;

@@ -14,7 +14,7 @@ const Title = styled.p`
   margin-bottom: 1rem;
   font-size: 64px;
   font-weight: 700;
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
 
   @media screen and (min-width: 769px) {
     font-size: 120px;
@@ -34,19 +34,17 @@ const HomeLink = styled(Link)`
   text-decoration: underline;
 
   &:hover {
-    color: ${props => props.theme.color.highlight};
+    color: var(--highlight);
   }
 `;
 
 function NotFound() {
   return (
-    <Layout layoutType={'fullPage'}>
-      <Container>
-        <Title>404</Title>
-        <Subtitle>Page Not Found</Subtitle>
-        <HomeLink to="/">Home</HomeLink>
-      </Container>
-    </Layout>
+    <Container>
+      <Title>404</Title>
+      <Subtitle>Page Not Found</Subtitle>
+      <HomeLink to="/">Home</HomeLink>
+    </Container>
   );
 }
 

@@ -31,7 +31,6 @@ function PostFooter({ postId, frontmatter, moreList, prev, next }: Props) {
             moreList={moreList}
           />
         )}
-
       <TagShare tags={frontmatter.tags} />
       <PrevNext next={next} prev={prev} />
     </Container>

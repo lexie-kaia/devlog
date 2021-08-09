@@ -12,7 +12,7 @@ const TagList = styled.ul`
   font-size: 14px;
   line-height: 20px;
   text-transform: uppercase;
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
 `;
 
 const TagItem = styled.li`
@@ -27,7 +27,7 @@ const TagItem = styled.li`
     &:focus {
       outline: none;
       text-decoration: underline;
-      color: ${props => props.theme.color.highlight};
+      color: var(--highlight);
     }
   }
 `;

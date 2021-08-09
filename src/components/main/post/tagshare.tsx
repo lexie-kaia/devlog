@@ -10,7 +10,7 @@ type Props = {
 
 const Container = styled.div`
   padding: 1.5rem 0 0.75rem;
-  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
+  border-bottom: 1px solid var(--line);
 
   @media screen and (min-width: 577px) {
     display: flex;

@@ -37,8 +37,8 @@ const OpenButton = styled.button<{ isOpen: boolean }>`
   transform: ${props => (props.isOpen ? 'rotate(0)' : 'rotate(180deg)')};
 
   svg {
-    fill: ${props => props.theme.color.textMain};
-    stroke: ${props => props.theme.color.textMain};
+    fill: var(--text-prime);
+    stroke: var(--text-prime);
     stroke-width: 1px;
     width: 16px;
     height: 16px;
@@ -48,8 +48,8 @@ const OpenButton = styled.button<{ isOpen: boolean }>`
   &:hover {
     outline: none;
     svg {
-      fill: ${props => props.theme.color.highlight};
-      stroke: ${props => props.theme.color.highlight};
+      fill: var(--highlight);
+      stroke: var(--highlight);
     }
   }
 `;

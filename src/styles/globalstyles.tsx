@@ -1,9 +1,7 @@
 import React from 'react';
-import { Global, css, useTheme } from '@emotion/react';
+import { Global, css } from '@emotion/react';
 
 function Globalstyles() {
-  const theme = useTheme();
-
   return (
     <Global
       styles={css`
@@ -21,8 +19,48 @@ function Globalstyles() {
         }
 
         body {
-          background: ${theme.color.backMain};
-          color: ${theme.color.textMain};
+          --back-main: #ffffff;
+          --back-sub: #f8fafb;
+          --line: #e1e4e6;
+          --text-prime: #363a3c;
+          --text-second: #878d91;
+          --highlight: #4c80f1;
+          --shadow: rgba(54, 58, 60, 0.1);
+        }
+
+        body.light {
+          --back-main: #ffffff;
+          --back-sub: #f8fafb;
+          --line: #e1e4e6;
+          --text-prime: #363a3c;
+          --text-second: #878d91;
+          --highlight: #4c80f1;
+          --shadow: rgba(54, 58, 60, 0.1);
+        }
+
+        body.dim {
+          --back-main: #202124;
+          --back-sub: #303134;
+          --line: #3c4043;
+          --text-prime: #ced0d5;
+          --text-second: #969ba1;
+          --highlight: #8ab4f8;
+          --shadow: rgba(206, 208, 213, 0.15);
+        }
+
+        body.dark {
+          --back-main: #000000;
+          --back-sub: #1d1d1d;
+          --line: #414141;
+          --text-prime: #ffffff;
+          --text-second: #b2b2b2;
+          --highlight: #146cff;
+          --shadow: rgba(255, 255, 255, 0.15);
+        }
+
+        body {
+          background: var(--back-main);
+          color: var(--text-prime);
           font-family: 'Spoqa Han Sans Neo', 'sans-serif';
           line-height: 1;
           min-height: 100vh;

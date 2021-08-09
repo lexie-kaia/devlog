@@ -15,7 +15,7 @@ type Props = {
 
 const Container = styled.section`
   padding: 1.5rem 1rem;
-  background: ${props => props.theme.color.backSub};
+  background: var(--back-sub);
 
   @media screen and (min-width: 577px) {
     padding: 1.5rem 2rem;
@@ -45,7 +45,7 @@ const Title = styled.h2`
 `;
 
 const TitleLink = styled(Link)`
-  color: ${props => props.theme.color.highlight};
+  color: var(--highlight);
 
   &:hover,
   &:focus {
@@ -59,8 +59,8 @@ const OpenButton = styled.button<{ isOpen: boolean }>`
   transform: ${props => (props.isOpen ? 'rotate(0)' : 'rotate(180deg)')};
 
   svg {
-    fill: ${props => props.theme.color.textMain};
-    stroke: ${props => props.theme.color.textMain};
+    fill: var(--text-prime);
+    stroke: var(--text-prime);
     stroke-width: 1px;
     width: 16px;
     height: 16px;
@@ -70,8 +70,8 @@ const OpenButton = styled.button<{ isOpen: boolean }>`
   &:hover {
     outline: none;
     svg {
-      fill: ${props => props.theme.color.highlight};
-      stroke: ${props => props.theme.color.highlight};
+      fill: var(--highlight);
+      stroke: var(--highlight);
     }
   }
 `;
@@ -80,11 +80,11 @@ const MoreButton = styled.button<{ hasMore: boolean }>`
   display: ${props => (props.hasMore ? 'flex' : 'none')};
   align-items: center;
   margin: 0.75rem 0;
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
 
   svg {
-    fill: ${props => props.theme.color.textSub};
-    stroke: ${props => props.theme.color.textSub};
+    fill: var(--text-second);
+    stroke: var(--text-second);
     stroke-width: 1px;
     width: 14px;
     height: 14px;
@@ -93,11 +93,11 @@ const MoreButton = styled.button<{ hasMore: boolean }>`
   &:focus,
   &:hover {
     outline: none;
-    color: ${props => props.theme.color.highlight};
+    color: var(--highlight);
 
     svg {
-      fill: ${props => props.theme.color.highlight};
-      stroke: ${props => props.theme.color.highlight};
+      fill: var(--highlight);
+      stroke: var(--highlight);
     }
   }
 `;

@@ -11,12 +11,12 @@ type Props = PostFrontMatterType;
 
 const Container = styled.div`
   padding: 1.5rem 0;
-  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
+  border-bottom: 1px solid var(--line);
 `;
 
 const Category = styled.p`
   margin-bottom: 0.25rem;
-  color: ${props => props.theme.color.highlight};
+  color: var(--highlight);
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
@@ -40,7 +40,7 @@ const Title = styled.h3`
     &:hover,
     &:focus {
       outline: none;
-      color: ${props => props.theme.color.highlight};
+      color: var(--highlight);
       text-decoration: underline;
     }
   }
@@ -48,7 +48,7 @@ const Title = styled.h3`
 
 const Date = styled.p`
   margin-bottom: 0.25rem;
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
   font-size: 14px;
   line-height: 20px;
 `;

@@ -35,13 +35,13 @@ const IconLink = styled(Link)`
   display: flex;
   align-items: center;
   margin-bottom: 0.25rem;
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
 
   svg {
     width: 10px;
     height: 10px;
-    fill: ${props => props.theme.color.textSub};
-    stroke: ${props => props.theme.color.textSub};
+    fill: var(--text-second);
+    stroke: var(--text-second);
     stroke-width: 1.5px;
   }
 
@@ -82,7 +82,7 @@ const TitleLink = styled(Link)`
   &:hover,
   &:focus {
     outline: none;
-    color: ${props => props.theme.color.highlight};
+    color: var(--highlight);
     text-decoration: underline;
   }
 `;

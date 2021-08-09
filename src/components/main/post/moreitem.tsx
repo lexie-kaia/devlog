@@ -21,14 +21,14 @@ const Title = styled.h3`
     &:hover,
     &:focus {
       outline: none;
-      color: ${props => props.theme.color.highlight};
+      color: var(--highlight);
       text-decoration: underline;
     }
   }
 `;
 
 const CurrentPost = styled.span`
-  color: ${props => props.theme.color.highlight};
+  color: var(--highlight);
 `;
 
 const Flex = styled.div`
@@ -37,7 +37,7 @@ const Flex = styled.div`
 `;
 
 const Date = styled.span`
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
   font-size: 14px;
   line-height: 20px;
 

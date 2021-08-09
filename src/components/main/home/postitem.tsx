@@ -13,7 +13,7 @@ type Props = PostFrontMatterType & {
 
 const Container = styled.li`
   padding: 1.5rem 0;
-  border-bottom: ${props => `1px solid ${props.theme.color.line}`};
+  border-bottom: 1px solid var(--line);
 `;
 
 function PostItem({ postListStyle, ...props }: Props) {
