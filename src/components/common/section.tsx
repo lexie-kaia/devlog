@@ -1,7 +1,8 @@
 import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
 // components
-import { ChevronUp } from 'react-bootstrap-icons';
+import { ChevronDown } from 'react-bootstrap-icons';
+import IconButton from './icon-button';
 
 type Props = {
   children: ReactNode;
@@ -32,34 +33,26 @@ const Title = styled.h2`
   text-transform: uppercase;
 `;
 
-const OpenButton = styled.button<{ isOpen: boolean }>`
-  margin-left: 0.75rem;
-  transform: ${props => (props.isOpen ? 'rotate(0)' : 'rotate(180deg)')};
+const OpenButton = styled(IconButton)<{ isOpen: boolean }>`
+  margin-right: 0.5rem;
+  transform: ${props => (props.isOpen ? 'rotate(0)' : 'rotate(-90deg)')};
+  transition: transform 200ms ease-in-out;
 
   svg {
-    fill: var(--text-prime);
-    stroke: var(--text-prime);
-    stroke-width: 1px;
     width: 16px;
     height: 16px;
+    fill: var(--text-second);
+    stroke: var(--text-second);
+    stroke-width: 0.5px;
   }
 
   &:focus,
-  &:hover {
-    outline: none;
+  &:hover,
+  &:active {
     svg {
-      fill: var(--highlight);
       stroke: var(--highlight);
     }
   }
-`;
-
-const ButtonIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 32px;
-  height: 32px;
 `;
 
 function Section({ children, title, isAccordion }: Props) {
@@ -76,14 +69,12 @@ function Section({ children, title, isAccordion }: Props) {
   return (
     <Container>
       <Header>
-        <Title>{title}</Title>
         {isAccordion && (
           <OpenButton onClick={onClick} isOpen={isOpen}>
-            <ButtonIcon>
-              <ChevronUp />
-            </ButtonIcon>
+            <ChevronDown />
           </OpenButton>
         )}
+        <Title>{title}</Title>
       </Header>
       <Body isOpen={isOpen}>{children}</Body>
     </Container>

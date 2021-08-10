@@ -3,14 +3,15 @@ import styled from '@emotion/styled';
 // components
 import { Link } from 'gatsby';
 import { X } from 'react-bootstrap-icons';
+// hooks
+import { useQueryString } from '../../store/querystring';
 // types
-import { MenuTypeType, QueryStringType } from '../../../types';
+import { MenuTypeType } from '../../types';
 
 type Props = {
   menuType: MenuTypeType;
   menuItem: string;
   count: number;
-  queryString: QueryStringType;
 };
 
 const Container = styled.li<{
@@ -26,9 +27,7 @@ const Container = styled.li<{
 
   a {
     color: ${props =>
-      props.isCurrentQuery
-        ? props.theme.color.highlight
-        : props.theme.color.textSub};
+      props.isCurrentQuery ? `var(--highlight)` : `var(--text-second)`};
 
     &:hover,
     &:focus {
@@ -48,14 +47,14 @@ const XLink = styled(Link)`
   border-radius: 10px;
 
   svg {
-    fill: ${props => props.theme.color.highlight};
+    fill: var(--highlight);
     width: 20px;
     height: 20px;
   }
 `;
 
 const isCurrentQuery = (
-  queryString: QueryStringType,
+  queryString: string,
   queryKey: 'category' | 'tag',
   queryValue: string
 ): boolean => {
@@ -66,7 +65,7 @@ const isCurrentQuery = (
 };
 
 const addQuery = (
-  queryString: QueryStringType,
+  queryString: string,
   queryKey: 'category' | 'tag',
   queryValue: string
 ): string => {
@@ -106,10 +105,7 @@ const addQuery = (
   return result;
 };
 
-const deleteQuery = (
-  queryString: QueryStringType,
-  queryValue: string
-): string => {
+const deleteQuery = (queryString: string, queryValue: string): string => {
   let result = '/';
 
   const newQueryString = queryString.replace(`tag=${queryValue}`, '');
@@ -126,7 +122,8 @@ const deleteQuery = (
   return result;
 };
 
-function FilterItem({ menuType, menuItem, count, queryString }: Props) {
+function SideMenuItem({ menuType, menuItem, count }: Props) {
+  const { queryString, setQueryString } = useQueryString();
   return (
     <Container
       isCurrentQuery={isCurrentQuery(queryString, menuType, menuItem)}
@@ -146,4 +143,4 @@ function FilterItem({ menuType, menuItem, count, queryString }: Props) {
   );
 }
 
-export default FilterItem;
+export default SideMenuItem;

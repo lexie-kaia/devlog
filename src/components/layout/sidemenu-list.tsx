@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from '@emotion/styled';
 // components
-import MenuItem from './menuitem';
+import MenuItem from './sidemenu-item';
 // types
-import { MenuListType, MenuTypeType, QueryStringType } from '../../../types';
+import { MenuListType, MenuTypeType } from '../../types';
 
 type Props = {
   menuType: MenuTypeType;
   menuList: MenuListType;
-  queryString: QueryStringType;
 };
 
 const Container = styled.ul`
-  padding: 1.5rem 0;
+  padding: 1.5rem 0 1.5rem 0.5rem;
 `;
 
-function MenuList({ menuType, menuList, queryString }: Props) {
+function SidemenuList({ menuType, menuList }: Props) {
   return (
     <Container>
       {Array.from(menuList).map(([category, count]) => (
@@ -24,11 +23,10 @@ function MenuList({ menuType, menuList, queryString }: Props) {
           menuType={menuType}
           menuItem={category}
           count={count}
-          queryString={queryString}
         />
       ))}
     </Container>
   );
 }
 
-export default MenuList;
+export default SidemenuList;

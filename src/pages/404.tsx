@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import Layout from '../components/layout/layout';
 import { Link } from 'gatsby';
+// components
+import Layout from '../components/layout/layout';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: calc(100vh - 10rem);
   padding: 0 1rem;
 `;
 
@@ -40,11 +43,13 @@ const HomeLink = styled(Link)`
 
 function NotFound() {
   return (
-    <Container>
-      <Title>404</Title>
-      <Subtitle>Page Not Found</Subtitle>
-      <HomeLink to="/">Home</HomeLink>
-    </Container>
+    <Layout layoutType={'fullPage'}>
+      <Container>
+        <Title>404</Title>
+        <Subtitle>Page Not Found</Subtitle>
+        <HomeLink to="/">Home</HomeLink>
+      </Container>
+    </Layout>
   );
 }
 

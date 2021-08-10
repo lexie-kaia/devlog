@@ -1,7 +1,5 @@
 // import { ImageDataLike } from 'gatsby-plugin-image';
 
-export type QueryStringType = string;
-
 export type PostsType = PostType[];
 
 export type PostType = {
@@ -19,10 +17,6 @@ export type PostFrontMatterType = {
 };
 
 export type PostListStyleType = 'block' | 'list';
-
-export type MenuTypeType = 'category' | 'tag';
-
-export type MenuListType = Map<string, number>;
 
 export type PrevNextPostType = {
   frontmatter: {
@@ -42,6 +36,14 @@ export type MorePostFrontMatterType = {
   date: string;
   tags: string[];
 };
+
+export type QueryStringType = string;
+
+export type LayoutTypeType = 'fullPage' | 'infiniteScroll';
+
+export type MenuTypeType = 'category' | 'tag';
+
+export type MenuListType = Map<string, number>;
 
 export type TocType = {
   title?: string;

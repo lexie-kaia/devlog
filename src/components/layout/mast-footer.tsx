@@ -1,17 +1,18 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import ContentsArea from './contentsarea';
+// components
+import PageMargin from '../common/page-margin';
 
 const Container = styled.footer`
-  background: ${props => props.theme.color.backSub};
+  border-top: 1px solid var(--line);
 `;
 
-const Contents = styled(ContentsArea)`
+const Contents = styled(PageMargin)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 5rem;
-  color: ${props => props.theme.color.textSub};
+  color: var(--text-second);
   font-size: 14px;
   line-height: 20px;
 `;
@@ -28,12 +29,12 @@ const Anchor = styled.a`
   &:hover,
   &:focus {
     outline: none;
-    color: ${props => props.theme.color.highlight};
+    color: var(--highlight);
     text-decoration: underline;
   }
 `;
 
-function Footer() {
+function MastFooter() {
   const getYear = () => {
     const date = new Date();
     return date.getFullYear();
@@ -42,7 +43,7 @@ function Footer() {
   return (
     <Container>
       <Contents>
-        <Copyright>© {getYear()} GG.LOG all rights reserved.</Copyright>
+        <Copyright>© {getYear()} LEXIE all rights reserved.</Copyright>
         <Contact>
           <Anchor href="mailto:kaia.gayeon.kim@gmail.com">Mail</Anchor>
           <Anchor href="https://github.com/lexie-kaia">Github</Anchor>
@@ -52,4 +53,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default MastFooter;

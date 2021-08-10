@@ -17,12 +17,17 @@ const IconButton = styled.button`
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     outline: none;
     background: var(--back-sub);
     svg {
       fill: var(--highlight);
     }
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--highlight);
   }
 `;
 

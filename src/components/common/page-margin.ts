@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
-const ContentsArea = styled.div`
+const PageMargin = styled.div`
   padding: 0 1rem;
-  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
   @media screen and (min-width: 577px) {
@@ -16,4 +15,4 @@ const ContentsArea = styled.div`
   }
 `;
 
-export default ContentsArea;
+export default PageMargin;

@@ -1,20 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { graphql } from 'gatsby';
+import * as queryStringParser from 'query-string';
 // components
-import Layout from '../components/layout/layout';
 import Main from '../components/main/home/main';
+import Layout from '../components/layout/layout';
+// hooks
+import { useQueryString } from '../store/querystring';
+// types
+import { PostType } from '../types';
 
 type Props = {
-  location: {
-    search: string;
-  };
   data: any;
 };
 
-function Home({ data, location }: Props) {
+function Home({ data }: Props) {
+  const { queryString, setQueryString } = useQueryString();
+
+  const postList = useMemo(() => {
+    const {
+      allMdx: { nodes: allPosts },
+    } = data;
+    const query = queryStringParser.parse(queryString);
+    const queryCategory = query.category ? query.category : '';
+    const queryTags = query.tag
+      ? typeof query.tag === 'string'
+        ? [query.tag]
+        : query.tag
+      : [];
+
+    return allPosts.filter((post: PostType) => {
+      const {
+        frontmatter: { category: postCategory, tags: postTags },
+      } = post;
+
+      if (queryCategory === '' && queryTags === []) return true;
+
+      if (queryCategory) {
+        if (postCategory !== queryCategory) return false;
+      }
+
+      if (queryTags.length !== 0) {
+        for (let i = 0; i < queryTags.length; i++) {
+          if (!postTags.includes(queryTags[i])) {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    });
+  }, [queryString]);
+
   return (
-    <Layout layoutType={'list'}>
-      <Main allPosts={data.allMdx.nodes} queryString={location.search} />
+    <Layout layoutType={'infiniteScroll'}>
+      <Main postList={postList} queryString={queryString} />
     </Layout>
   );
 }

@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 // component
 import Layout from '../components/layout/layout';
-import ContentsArea from '../components/layout/contentsarea';
+import PageMargin from '../components/common/page-margin';
 import PostHeader from '../components/main/post/postheader';
 import PostBody from '../components/main/post/postbody';
 import PostFooter from '../components/main/post/postfooter';
@@ -14,7 +14,7 @@ type Props = {
   data: any;
 };
 
-const Container = styled(ContentsArea)`
+const Container = styled(PageMargin)`
   max-width: 1080px;
   margin: 1.5rem auto 3rem;
 `;
