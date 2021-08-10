@@ -1,13 +1,13 @@
 import './src/styles/prismcustom.css';
 
 import React from 'react';
-import ThemeProvider from './src/store/theme_provider';
-import GlobalComponent from './src/components/global/global-component';
+import GlobalProvider from './src/components/global/global-store';
+import GlobalComponent from './src/components/global/global-components';
 
 export const wrapPageElement = ({ element, props }) => {
   return <GlobalComponent {...props}>{element}</GlobalComponent>;
 };
 
 export const wrapRootElement = ({ element }) => {
-  return <ThemeProvider>{element}</ThemeProvider>;
+  return <GlobalProvider>{element}</GlobalProvider>;
 };

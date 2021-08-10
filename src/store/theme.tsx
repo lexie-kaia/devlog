@@ -1,6 +1,11 @@
-import React, { ReactNode, createContext, useEffect, useState } from 'react';
-import { useCallback } from 'react';
-import { useContext } from 'react';
+import React, {
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+} from 'react';
 
 type Theme = 'light' | 'dim' | 'dark';
 
@@ -15,7 +20,7 @@ type Props = {
 
 const ThemeContext = createContext<Value>({ theme: 'light' });
 
-const ThemeProvider = ({ children }: Props) => {
+export default function ThemeProvider({ children }: Props) {
   // console.log('theme provider is loading');
   const [theme, setTheme] = useState<Theme>('light');
 
@@ -80,12 +85,10 @@ const ThemeProvider = ({ children }: Props) => {
       {children}
     </ThemeContext.Provider>
   );
-};
+}
 
 export const useTheme = () => {
   const { theme, onThemeButtonClick } = useContext(ThemeContext);
 
   return { theme, onThemeButtonClick };
 };
-
-export default ThemeProvider;
