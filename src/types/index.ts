@@ -16,7 +16,7 @@ export type PostFrontMatterType = {
   // thumbnail?: ImageDataLike;
 };
 
-export type PostListStyleType = 'block' | 'list';
+export type PostListStyleType = 'default' | 'compact';
 
 export type PrevNextPostType = {
   frontmatter: {
