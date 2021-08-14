@@ -8,20 +8,22 @@ import { PostListStyleType, PostFrontMatterType } from '../../../types';
 
 type Props = PostFrontMatterType & {
   slug: string;
-  postListStyle: PostListStyleType;
+  listStyle: PostListStyleType;
 };
 
-const Container = styled.li`
+const PostItemContainer = styled.li`
   padding: 1.5rem 0;
-  border-bottom: 1px solid var(--line);
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--line);
+  }
 `;
 
-function PostItem({ postListStyle, ...props }: Props) {
+function PostItem({ listStyle, ...props }: Props) {
   return (
-    <Container>
-      {postListStyle === 'block' && <PostItemBlock {...props} />}
-      {postListStyle === 'list' && <PostItemList {...props} />}
-    </Container>
+    <PostItemContainer>
+      {listStyle === 'default' && <PostItemBlock {...props} />}
+      {listStyle === 'compact' && <PostItemList {...props} />}
+    </PostItemContainer>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { graphql } from 'gatsby';
 import * as queryStringParser from 'query-string';
 // components
-import Main from '../components/main/home/main';
+import HomeMain from '../components/main/home/homemain';
 import Layout from '../components/layout/layout';
 // hooks
 import { useQueryString } from '../store/querystring';
@@ -53,7 +53,7 @@ function Home({ data }: Props) {
 
   return (
     <Layout layoutType={'infiniteScroll'}>
-      <Main postList={postList} queryString={queryString} />
+      <HomeMain postList={postList} />
     </Layout>
   );
 }

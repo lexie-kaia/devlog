@@ -2,24 +2,25 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import PostItem from './postitem';
 import { PostListStyleType, PostsType, QueryStringType } from '../../../types';
+import { useQueryString } from '../../../store/querystring';
 
 type Props = {
   postList: PostsType;
-  queryString: QueryStringType;
-  postListStyle: PostListStyleType;
+  listStyle: PostListStyleType;
 };
 
-const Container = styled.ul``;
+const PostListContainer = styled.ul``;
 
 const NUMBER_OF_ITEMS_PER_PAGE = 10;
 
-function PostList({ postList, queryString, postListStyle }: Props) {
+function PostList({ postList, listStyle }: Props) {
+  const { queryString, setQueryString } = useQueryString();
   const containerRef = useRef<HTMLUListElement>(null);
   const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     setPage(1);
-  }, [queryString, postListStyle]);
+  }, [queryString, listStyle]);
 
   useEffect(() => {
     if (
@@ -41,23 +42,18 @@ function PostList({ postList, queryString, postListStyle }: Props) {
     return () => {
       observer.disconnect();
     };
-  }, [page, queryString, postListStyle]);
+  }, [page, queryString, listStyle]);
 
   return (
-    <Container ref={containerRef}>
+    <PostListContainer ref={containerRef}>
       {postList
         .slice(0, page * NUMBER_OF_ITEMS_PER_PAGE)
         .map(({ id, slug, frontmatter: { ...props } }) => {
           return (
-            <PostItem
-              key={id}
-              slug={slug}
-              {...props}
-              postListStyle={postListStyle}
-            />
+            <PostItem key={id} slug={slug} {...props} listStyle={listStyle} />
           );
         })}
-    </Container>
+    </PostListContainer>
   );
 }
 
