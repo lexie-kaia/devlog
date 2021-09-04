@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import LocationProvider from '../../store/location';
-import ThemeProvider from '../../store/theme';
+// stores
+import LocationProvider from '../../store/Location';
+import ThemeProvider from '../../store/Theme';
 
 type Props = {
   children: ReactNode;

@@ -1,7 +1,7 @@
 import React, { ReactNode, useMemo, useState } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 // components
-import MastLayout from './mast-layout';
+import MasterLayout from './MasterLayout';
 // types
 import { LayoutTypeType, PostType } from '../../types';
 
@@ -10,7 +10,7 @@ type Props = {
   layoutType?: LayoutTypeType;
 };
 
-function Layout({ children, layoutType }: Props) {
+export default function Layout({ children, layoutType }: Props) {
   const data = useStaticQuery(graphql`
     query QueryPostsOnlyWithCategoryAndTag {
       allMdx {
@@ -59,14 +59,12 @@ function Layout({ children, layoutType }: Props) {
   }, [data]);
 
   return (
-    <MastLayout
+    <MasterLayout
       categoryList={categoryList}
       tagList={tagList}
       isFullPageLayout={layoutType === 'fullPage' ? true : false}
     >
       {children}
-    </MastLayout>
+    </MasterLayout>
   );
 }
-
-export default Layout;

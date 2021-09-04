@@ -5,7 +5,7 @@ type Props = {
   contentType: 'default' | 'compact';
 };
 
-function ListStyleItemContent({ contentType }: Props) {
+export default function ListStyleItemContent({ contentType }: Props) {
   return (
     <>
       {contentType === 'default' && (
@@ -23,5 +23,3 @@ function ListStyleItemContent({ contentType }: Props) {
     </>
   );
 }
-
-export default ListStyleItemContent;

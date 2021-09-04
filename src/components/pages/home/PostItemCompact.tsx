@@ -2,11 +2,36 @@ import React from 'react';
 import styled from '@emotion/styled';
 // components
 import { Link } from 'gatsby';
-import Tag from '../../common/tag';
+import TagRenderer from '../../common/Tag';
 // types
 import { PostFrontMatterType } from '../../../types';
 
 type Props = PostFrontMatterType & { slug: string };
+
+export default function PostItemList({
+  category,
+  title,
+  date,
+  tags,
+  slug,
+}: Props) {
+  return (
+    <>
+      <Title>
+        <Link to={`/${slug}`}>{title}</Link>
+      </Title>
+      <Metadata>
+        <Category>
+          <Link to={`/?category=${category}`}>
+            {category.replace(/\-/g, ' · ')}
+          </Link>
+        </Category>
+        <Date>{date}</Date>
+        <TagRenderer tags={tags} />
+      </Metadata>
+    </>
+  );
+}
 
 const Title = styled.h3`
   margin-bottom: 0.25rem;
@@ -59,24 +84,3 @@ const Date = styled.span`
     margin: 0 0.5rem;
   }
 `;
-
-function PostItemList({ category, title, date, tags, slug }: Props) {
-  return (
-    <>
-      <Title>
-        <Link to={`/${slug}`}>{title}</Link>
-      </Title>
-      <Metadata>
-        <Category>
-          <Link to={`/?category=${category}`}>
-            {category.replace(/\-/g, ' · ')}
-          </Link>
-        </Category>
-        <Date>{date}</Date>
-        <Tag tags={tags} />
-      </Metadata>
-    </>
-  );
-}
-
-export default PostItemList;

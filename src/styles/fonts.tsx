@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-function Fonts() {
+export default function Fonts() {
   return (
     <Helmet>
       <link
@@ -18,5 +18,3 @@ function Fonts() {
     </Helmet>
   );
 }
-
-export default Fonts;

@@ -6,33 +6,7 @@ type Props = {
   tags: string[];
 };
 
-const TagList = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 14px;
-  line-height: 20px;
-  text-transform: uppercase;
-  color: var(--text-second);
-`;
-
-const TagItem = styled.li`
-  margin-right: 0.25rem;
-
-  a {
-    &:before {
-      content: '#';
-    }
-
-    &:hover,
-    &:focus {
-      outline: none;
-      text-decoration: underline;
-      color: var(--highlight);
-    }
-  }
-`;
-
-function Tag({ tags }: Props) {
+export default function TagRenderer({ tags }: Props) {
   return (
     <>
       {tags && tags.length > 0 && (
@@ -48,4 +22,29 @@ function Tag({ tags }: Props) {
   );
 }
 
-export default Tag;
+const TagList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  color: var(--text-second);
+  font-size: 14px;
+  line-height: 20px;
+  text-transform: uppercase;
+`;
+
+const TagItem = styled.li`
+  margin-right: 0.25rem;
+
+  a {
+    &:before {
+      content: '#';
+    }
+
+    &:hover,
+    &:focus,
+    &:acitve {
+      outline: none;
+      text-decoration: underline;
+      color: var(--highlight);
+    }
+  }
+`;

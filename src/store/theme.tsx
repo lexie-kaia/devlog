@@ -3,7 +3,6 @@ import React, {
   createContext,
   useEffect,
   useState,
-  useCallback,
   useContext,
 } from 'react';
 
@@ -11,7 +10,7 @@ type Theme = 'light' | 'dim' | 'dark';
 
 type Value = {
   theme: Theme;
-  onThemeButtonClick?: () => void;
+  changeTheme?: (theme: Theme) => void;
 };
 
 type Props = {
@@ -21,7 +20,6 @@ type Props = {
 const ThemeContext = createContext<Value>({ theme: 'light' });
 
 export default function ThemeProvider({ children }: Props) {
-  // console.log('theme provider is loading');
   const [theme, setTheme] = useState<Theme>('light');
 
   const changeTheme = (theme: Theme) => {
@@ -63,32 +61,15 @@ export default function ThemeProvider({ children }: Props) {
     changeTheme(getInitialColorTheme());
   }, []);
 
-  const onThemeButtonClick = useCallback(() => {
-    switch (theme) {
-      case 'light':
-        changeTheme('dim');
-        return;
-      case 'dim':
-        changeTheme('dark');
-        return;
-      case 'dark':
-        changeTheme('light');
-        return;
-      default:
-        changeTheme('light');
-        return;
-    }
-  }, [theme]);
-
   return (
-    <ThemeContext.Provider value={{ theme, onThemeButtonClick }}>
+    <ThemeContext.Provider value={{ theme, changeTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 }
 
 export const useTheme = () => {
-  const { theme, onThemeButtonClick } = useContext(ThemeContext);
+  const { theme, changeTheme } = useContext(ThemeContext);
 
-  return { theme, onThemeButtonClick };
+  return { theme, changeTheme };
 };

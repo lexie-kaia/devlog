@@ -2,10 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { graphql } from 'gatsby';
 import * as queryStringParser from 'query-string';
 // components
-import HomeMain from '../components/main/home/homemain';
-import Layout from '../components/layout/layout';
+import HomeRenderer from '../components/pages/home/HomeIndex';
+import Layout from '../components/layout/LayoutIndex';
 // hooks
-import { useQueryString } from '../store/querystring';
+import { useQueryString } from '../store/Location';
 // types
 import { PostType } from '../types';
 
@@ -13,7 +13,7 @@ type Props = {
   data: any;
 };
 
-function Home({ data }: Props) {
+export default function Home({ data }: Props) {
   const { queryString, setQueryString } = useQueryString();
 
   const postList = useMemo(() => {
@@ -53,12 +53,10 @@ function Home({ data }: Props) {
 
   return (
     <Layout layoutType={'infiniteScroll'}>
-      <HomeMain postList={postList} />
+      <HomeRenderer postList={postList} />
     </Layout>
   );
 }
-
-export default Home;
 
 export const pageQuery = graphql`
   query QueryPosts {

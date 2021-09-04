@@ -1,6 +1,6 @@
 import React from 'react';
 
-function LogoWordSvg(props: any) {
+export default function LogoWordSvg(props: any) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,5 +11,3 @@ function LogoWordSvg(props: any) {
     </svg>
   );
 }
-
-export default LogoWordSvg;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 // components
-import MenuItem from './sidemenu-item';
+import MenuItem from './SideMenuItem';
 // types
 import { MenuListType, MenuTypeType } from '../../types';
 
@@ -10,13 +10,9 @@ type Props = {
   menuList: MenuListType;
 };
 
-const Container = styled.ul`
-  padding: 1.5rem 0 1.5rem 0.5rem;
-`;
-
-function SidemenuList({ menuType, menuList }: Props) {
+export default function SidemenuListRenderer({ menuType, menuList }: Props) {
   return (
-    <Container>
+    <SideMenu>
       {Array.from(menuList).map(([category, count]) => (
         <MenuItem
           key={category}
@@ -25,8 +21,10 @@ function SidemenuList({ menuType, menuList }: Props) {
           count={count}
         />
       ))}
-    </Container>
+    </SideMenu>
   );
 }
 
-export default SidemenuList;
+const SideMenu = styled.ul`
+  padding: 1.5rem 0 1.5rem 0.5rem;
+`;

@@ -1,8 +1,8 @@
 import React, { ReactNode, useState } from 'react';
 import styled from '@emotion/styled';
-// components
 import { ChevronDown } from 'react-bootstrap-icons';
-import IconButton from './icon-button';
+// components
+import IconButton from './IconButton';
 
 type Props = {
   children: ReactNode;
@@ -10,7 +10,37 @@ type Props = {
   isAccordion?: boolean;
 };
 
-const Container = styled.section`
+export default function SectionRenderer({
+  children,
+  title,
+  isAccordion,
+}: Props) {
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const onClick = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+    }
+  };
+
+  return (
+    <Section>
+      <Header>
+        {isAccordion && (
+          <OpenButton onClick={onClick} isOpen={isOpen}>
+            <ChevronDown />
+          </OpenButton>
+        )}
+        <Title>{title}</Title>
+      </Header>
+      <Body isOpen={isOpen}>{children}</Body>
+    </Section>
+  );
+}
+
+const Section = styled.section`
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
@@ -41,7 +71,6 @@ const OpenButton = styled(IconButton)<{ isOpen: boolean }>`
   svg {
     width: 16px;
     height: 16px;
-    fill: var(--text-second);
     stroke: var(--text-second);
     stroke-width: 0.5px;
   }
@@ -54,31 +83,3 @@ const OpenButton = styled(IconButton)<{ isOpen: boolean }>`
     }
   }
 `;
-
-function Section({ children, title, isAccordion }: Props) {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-
-  const onClick = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
-  };
-
-  return (
-    <Container>
-      <Header>
-        {isAccordion && (
-          <OpenButton onClick={onClick} isOpen={isOpen}>
-            <ChevronDown />
-          </OpenButton>
-        )}
-        <Title>{title}</Title>
-      </Header>
-      <Body isOpen={isOpen}>{children}</Body>
-    </Container>
-  );
-}
-
-export default Section;

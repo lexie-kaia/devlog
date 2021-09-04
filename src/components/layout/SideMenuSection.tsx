@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 // components
-import Section from '../common/section';
-import SidemenuList from './sidemenu-list';
-import LogoWithMenuButton from './logo-with-menu-button';
+import SectionRenderer from '../common/Section';
+import SidemenuListRenderer from './SideMenuList';
+import LogoWithMenuButton from './LogoWithMenuButton';
 // types
 import { MenuListType } from '../../types';
 
@@ -14,6 +14,72 @@ type Props = {
   isSideMenuOpen: boolean;
   toggleSideMenu: () => void;
 };
+
+export default function SideMenuSectionRenderer({
+  categoryList,
+  tagList,
+  isFullPageLayout,
+  isSideMenuOpen,
+  toggleSideMenu,
+}: Props) {
+  const sideMenuBodyRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isFullPageLayout) return;
+    if (sideMenuBodyRef.current == null) return;
+
+    let rafOnScroll: any = null;
+
+    const onScroll = () => {
+      if (rafOnScroll) {
+        window.cancelAnimationFrame(rafOnScroll);
+      }
+
+      if (document.body.clientWidth <= 960) return;
+
+      rafOnScroll = window.requestAnimationFrame(() => {
+        if (sideMenuBodyRef.current == null) return;
+        if (window.pageYOffset > 80) {
+          sideMenuBodyRef.current.style.height = `100vh`;
+        } else {
+          sideMenuBodyRef.current.style.height = `calc(100vh - 5rem)`;
+        }
+      });
+    };
+
+    window.addEventListener('scroll', onScroll);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [isFullPageLayout]);
+
+  return (
+    <SideMenuContainer isFullPageLayout={isFullPageLayout}>
+      <SideMenuContent
+        isSideMenuOpen={isSideMenuOpen}
+        isFullPageLayout={isFullPageLayout}
+      >
+        <SideMenuHeader isFullPageLayout={isFullPageLayout}>
+          <LogoWithMenuButton toggleSideMenu={toggleSideMenu} />
+        </SideMenuHeader>
+        <SideMenuBody ref={sideMenuBodyRef} isFullPageLayout={isFullPageLayout}>
+          <SectionRenderer title="categories" isAccordion={true}>
+            <SidemenuListRenderer menuType="category" menuList={categoryList} />
+          </SectionRenderer>
+          <SectionRenderer title="tags" isAccordion={true}>
+            <SidemenuListRenderer menuType="tag" menuList={tagList} />
+          </SectionRenderer>
+        </SideMenuBody>
+      </SideMenuContent>
+      <BackShadow
+        isSideMenuOpen={isSideMenuOpen}
+        isFullPageLayout={isFullPageLayout}
+        onClick={toggleSideMenu}
+      />
+    </SideMenuContainer>
+  );
+}
 
 const SideMenuContainer = styled.nav<{
   isFullPageLayout: boolean;
@@ -110,71 +176,3 @@ const BackShadow = styled.div<{
         : `none`};
   }
 `;
-
-function SideMenu({
-  categoryList,
-  tagList,
-  isFullPageLayout,
-  isSideMenuOpen,
-  toggleSideMenu,
-}: Props) {
-  const sideMenuBodyRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isFullPageLayout) return;
-    if (sideMenuBodyRef.current == null) return;
-
-    let rafOnScroll: any = null;
-
-    const onScroll = () => {
-      if (rafOnScroll) {
-        window.cancelAnimationFrame(rafOnScroll);
-      }
-
-      if (document.body.clientWidth <= 960) return;
-
-      rafOnScroll = window.requestAnimationFrame(() => {
-        if (sideMenuBodyRef.current == null) return;
-        if (window.pageYOffset > 80) {
-          sideMenuBodyRef.current.style.height = `100vh`;
-        } else {
-          sideMenuBodyRef.current.style.height = `calc(100vh - 5rem)`;
-        }
-      });
-    };
-
-    window.addEventListener('scroll', onScroll);
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [isFullPageLayout]);
-
-  return (
-    <SideMenuContainer isFullPageLayout={isFullPageLayout}>
-      <SideMenuContent
-        isSideMenuOpen={isSideMenuOpen}
-        isFullPageLayout={isFullPageLayout}
-      >
-        <SideMenuHeader isFullPageLayout={isFullPageLayout}>
-          <LogoWithMenuButton toggleSideMenu={toggleSideMenu} />
-        </SideMenuHeader>
-        <SideMenuBody ref={sideMenuBodyRef} isFullPageLayout={isFullPageLayout}>
-          <Section title="categories" isAccordion={true}>
-            <SidemenuList menuType="category" menuList={categoryList} />
-          </Section>
-          <Section title="tags" isAccordion={true}>
-            <SidemenuList menuType="tag" menuList={tagList} />
-          </Section>
-        </SideMenuBody>
-      </SideMenuContent>
-      <BackShadow
-        isSideMenuOpen={isSideMenuOpen}
-        isFullPageLayout={isFullPageLayout}
-        onClick={toggleSideMenu}
-      />
-    </SideMenuContainer>
-  );
-}
-
-export default SideMenu;
