@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return;
   }
 
-  const postTemplate = path.resolve(`./src/templates/post_template.tsx`);
+  const postTemplate = path.resolve(`./src/templates/PostTemplate.tsx`);
   const posts = result.data.allMdx.edges;
 
   if (posts.length > 0) {

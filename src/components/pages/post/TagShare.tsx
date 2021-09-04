@@ -1,14 +1,27 @@
 import React from 'react';
 import styled from '@emotion/styled';
 // components
-import Share from '../../common/share';
-import Tag from '../../common/tag';
+import ShareRenderer from '../../common/Share';
+import TagRenderer from '../../common/Tag';
 
 type Props = {
   tags: string[];
 };
 
-const Container = styled.div`
+export default function TagShareRenderer({ tags }: Props) {
+  return (
+    <TagShare>
+      <Wrapper>
+        <TagRenderer tags={tags} />
+      </Wrapper>
+      <Wrapper>
+        <ShareRenderer />
+      </Wrapper>
+    </TagShare>
+  );
+}
+
+const TagShare = styled.div`
   padding: 1.5rem 0 0.75rem;
   border-bottom: 1px solid var(--line);
 
@@ -19,7 +32,7 @@ const Container = styled.div`
   }
 `;
 
-const Column = styled.div`
+const Wrapper = styled.div`
   &:first-of-type {
     margin-bottom: 0.75rem;
   }
@@ -30,18 +43,3 @@ const Column = styled.div`
     }
   }
 `;
-
-function TagShare({ tags }: Props) {
-  return (
-    <Container>
-      <Column>
-        <Tag tags={tags} />
-      </Column>
-      <Column>
-        <Share />
-      </Column>
-    </Container>
-  );
-}
-
-export default TagShare;

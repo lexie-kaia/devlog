@@ -1,13 +1,5 @@
 // import { ImageDataLike } from 'gatsby-plugin-image';
 
-export type PostsType = PostType[];
-
-export type PostType = {
-  id: string;
-  slug: string;
-  frontmatter: PostFrontMatterType;
-};
-
 export type PostFrontMatterType = {
   title: string;
   date: string;
@@ -16,13 +8,25 @@ export type PostFrontMatterType = {
   // thumbnail?: ImageDataLike;
 };
 
-export type PostListStyleType = 'default' | 'compact';
+export type PostsType = PostType[];
 
-export type PrevNextPostType = {
-  frontmatter: {
-    title: string;
-  };
+export type PostType = {
+  id: string;
   slug: string;
+  frontmatter: PostFrontMatterType;
+};
+
+export type DetailPostType = {
+  body: string;
+  id: string;
+  tableOfContents: TocListType;
+  frontmatter: PostFrontMatterType;
+};
+
+export type MorePostFrontMatterType = {
+  title: string;
+  date: string;
+  tags: string[];
 };
 
 export type MorePostType = {
@@ -31,11 +35,16 @@ export type MorePostType = {
   frontmatter: MorePostFrontMatterType;
 };
 
-export type MorePostFrontMatterType = {
-  title: string;
-  date: string;
-  tags: string[];
+export type MorePostsType = MorePostType[];
+
+export type PrevNextPostType = {
+  frontmatter: {
+    title: string;
+  };
+  slug: string;
 };
+
+export type PostListStyleType = 'default' | 'compact';
 
 export type QueryStringType = string;
 
@@ -45,8 +54,12 @@ export type MenuTypeType = 'category' | 'tag';
 
 export type MenuListType = Map<string, number>;
 
-export type TocType = {
-  title?: string;
-  url?: string;
-  items?: TocType[];
+export type TocListType = {
+  items: TocItemType[];
+};
+
+export type TocItemType = {
+  title: string;
+  url: string;
+  items?: TocItemType[];
 };

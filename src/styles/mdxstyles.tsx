@@ -187,12 +187,12 @@ const MdxBody = styled.div`
     }
   }
 
-  // img
+  // gatsby-image
   span[class*='gatsby-resp-image-wrapper'] {
     margin: 0.5rem 0;
   }
 
-  // pre, code
+  // gatsby-primsjs
   div[class*='gatsby-highlight'] {
     margin: 1rem 0;
   }
@@ -200,10 +200,60 @@ const MdxBody = styled.div`
   p > code {
     word-break: break-all;
   }
+
+  // gatsby-autolink-header
+  h1,
+  h2,
+  h3,
+  h4 {
+    &:hover {
+      a.anchor {
+        opacity: 1;
+      }
+    }
+  }
+
+  a.anchor {
+    position: absolute;
+    left: -2.5rem;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    opacity: 0;
+
+    .svg-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+      width: 2rem;
+      height: 2rem;
+      color: var(--text-second);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      opacity: 1;
+      .svg-wrapper {
+        background: var(--back-sub);
+        color: var(--highlight);
+      }
+    }
+
+    &:focus-visible {
+      .svg-wrapper {
+        box-shadow: 0 0 0 2px var(--highlight);
+      }
+    }
+  }
 `;
 
-function MdxStyles({ children }: Props) {
+export default function MdxStyles({ children }: Props) {
   return <MdxBody>{children}</MdxBody>;
 }
-
-export default MdxStyles;

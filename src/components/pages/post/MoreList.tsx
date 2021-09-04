@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MoreItem from './moreitem';
+// components
+import MoreItemRenderer from './MoreItem';
+// types
 import { MorePostType } from '../../../types';
 
 type Props = {
@@ -8,21 +10,19 @@ type Props = {
   postId: string;
 };
 
-const Container = styled.ul``;
-
-function MoreList({ moreList, postId }: Props) {
+export default function MoreListRenderer({ moreList, postId }: Props) {
   return (
-    <Container>
+    <MoreList>
       {moreList.map(moreItem => (
-        <MoreItem
+        <MoreItemRenderer
           key={moreItem.id}
           {...moreItem.frontmatter}
           slug={moreItem.slug}
           isCurrentPost={moreItem.id === postId}
         />
       ))}
-    </Container>
+    </MoreList>
   );
 }
 
-export default MoreList;
+export const MoreList = styled.ul``;

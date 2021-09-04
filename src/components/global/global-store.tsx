@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import QueryStringProvider from '../../store/querystring';
+import LocationProvider from '../../store/location';
 import ThemeProvider from '../../store/theme';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 function GlobalProvider({ children }: Props) {
   return (
     <ThemeProvider>
-      <QueryStringProvider>{children}</QueryStringProvider>
+      <LocationProvider>{children}</LocationProvider>
     </ThemeProvider>
   );
 }

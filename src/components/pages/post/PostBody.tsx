@@ -1,24 +1,23 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MdxStyles from '../../../styles/mdxstyles';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+// components
+import MdxStyles from '../../../styles/MdxStyles';
 
 type Props = {
   mdxBody: string;
 };
 
-const Container = styled.div`
-  padding: 5rem 0;
-`;
-
-function PostBody({ mdxBody }: Props) {
+export default function PostBodyRenderer({ mdxBody }: Props) {
   return (
-    <Container>
+    <PostBody>
       <MdxStyles>
         <MDXRenderer>{mdxBody}</MDXRenderer>
       </MdxStyles>
-    </Container>
+    </PostBody>
   );
 }
 
-export default PostBody;
+export const PostBody = styled.div`
+  padding: 5rem 0;
+`;

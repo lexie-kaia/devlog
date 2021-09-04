@@ -1,15 +1,37 @@
 import React from 'react';
 import styled from '@emotion/styled';
-// components
 import { Link } from 'gatsby';
-import Share from '../../common/share';
-import Tag from '../../common/tag';
-// type
+// components
+import ShareRenderer from '../../common/Share';
+import TagRenderer from '../../common/Tag';
+// types
 import { PostFrontMatterType } from '../../../types';
 
 type Props = PostFrontMatterType;
 
-const Container = styled.div`
+export default function PostHeader({ title, date, category, tags }: Props) {
+  return (
+    <Header>
+      <Category>
+        <Link to={`/?category=${category}`}>
+          {category.replace(/\-/g, ' · ')}
+        </Link>
+      </Category>
+      <Title id={title.replace(/ /g, '-')}>{title}</Title>
+      <WrapperRow>
+        <WrapperColumn>
+          <Date>{date}</Date>
+          <TagRenderer tags={tags} />
+        </WrapperColumn>
+        <WrapperColumn>
+          <ShareRenderer />
+        </WrapperColumn>
+      </WrapperRow>
+    </Header>
+  );
+}
+
+const Header = styled.header`
   padding: 1.5rem 0;
   border-bottom: 1px solid var(--line);
 `;
@@ -53,7 +75,7 @@ const Date = styled.p`
   line-height: 20px;
 `;
 
-const Flex = styled.div`
+const WrapperRow = styled.div`
   @media screen and (min-width: 577px) {
     display: flex;
     align-items: flex-end;
@@ -61,7 +83,7 @@ const Flex = styled.div`
   }
 `;
 
-const Column = styled.div`
+const WrapperColumn = styled.div`
   &:first-of-type {
     margin-bottom: 0.75rem;
   }
@@ -72,27 +94,3 @@ const Column = styled.div`
     }
   }
 `;
-
-function PostHeader({ title, date, category, tags }: Props) {
-  return (
-    <Container>
-      <Category>
-        <Link to={`/?category=${category}`}>
-          {category.replace(/\-/g, ' · ')}
-        </Link>
-      </Category>
-      <Title>{title}</Title>
-      <Flex>
-        <Column>
-          <Date>{date}</Date>
-          <Tag tags={tags} />
-        </Column>
-        <Column>
-          <Share />
-        </Column>
-      </Flex>
-    </Container>
-  );
-}
-
-export default PostHeader;

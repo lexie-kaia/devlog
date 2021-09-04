@@ -1,22 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
 
-const Container = styled.div`
-  div[class='utterances'] {
-    max-width: 100% !important;
-  }
-`;
-
-function Commentwidget() {
+export default function CommentWidgetRenderer() {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (divRef.current == null) return;
+
     const utterances = document.createElement('script');
 
     const attributes = {
       src: 'https://utteranc.es/client.js',
-      repo: 'lexie-kaia/lexie-kaia-github.io',
+      repo: 'lexie-kaia/lexie-kaia.github.io',
       'issue-term': 'pathname',
       label: 'Comment',
       theme: 'github-light',
@@ -30,7 +25,12 @@ function Commentwidget() {
 
     divRef.current.appendChild(utterances);
   }, []);
-  return <Container ref={divRef} />;
+
+  return <CommentWidget ref={divRef} />;
 }
 
-export default Commentwidget;
+const CommentWidget = styled.div`
+  .utterances {
+    max-width: 100% !important;
+  }
+`;

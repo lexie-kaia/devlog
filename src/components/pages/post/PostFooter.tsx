@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import MoreSection from './moresection';
-import TagShare from './tagshare';
-import PrevNext from './prevnext';
+// components
+import MoreSectionRenderer from './MoreSection';
+import TagShareRenderer from './TagShare';
+import PrevNextRenderer from './PrevNext';
+// types
 import {
   MorePostType,
   PostFrontMatterType,
@@ -10,31 +12,35 @@ import {
 } from '../../../types';
 
 type Props = {
-  prev: PrevNextPostType;
-  next: PrevNextPostType;
   postId: string;
   frontmatter: PostFrontMatterType;
   moreList: MorePostType[];
+  prev: PrevNextPostType;
+  next: PrevNextPostType;
 };
 
-const Container = styled.div``;
-
-function PostFooter({ postId, frontmatter, moreList, prev, next }: Props) {
+export default function PostFooterRenderer({
+  postId,
+  frontmatter,
+  moreList,
+  prev,
+  next,
+}: Props) {
   return (
-    <Container>
+    <PostFooter>
       {moreList &&
         moreList.length !== 0 &&
         !(moreList.length === 1 && moreList[0].id === postId) && (
-          <MoreSection
+          <MoreSectionRenderer
             postCategory={frontmatter.category}
             postId={postId}
             moreList={moreList}
           />
         )}
-      <TagShare tags={frontmatter.tags} />
-      <PrevNext next={next} prev={prev} />
-    </Container>
+      <TagShareRenderer tags={frontmatter.tags} />
+      <PrevNextRenderer next={next} prev={prev} />
+    </PostFooter>
   );
 }
 
-export default PostFooter;
+const PostFooter = styled.div``;

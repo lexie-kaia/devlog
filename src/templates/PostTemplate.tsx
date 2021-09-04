@@ -1,41 +1,22 @@
 import React from 'react';
 import { graphql } from 'gatsby';
-import styled from '@emotion/styled';
 // component
-import Layout from '../components/layout/layout';
-import PageMargin from '../components/common/page-margin';
-import PostHeader from '../components/main/post/postheader';
-import PostBody from '../components/main/post/postbody';
-import PostFooter from '../components/main/post/postfooter';
-import Section from '../components/common/section';
-import Commentwidget from '../services/comments_widget';
+import Layout from '../components/layout/LayoutIndex';
+import PostMainRenderer from '../components/pages/post/PostIndex';
 
 type Props = {
   data: any;
 };
 
-const Container = styled(PageMargin)`
-  max-width: 1080px;
-  margin: 1.5rem auto 3rem;
-`;
-
 function PostTemplate({ data }: Props) {
   return (
     <Layout layoutType={'fullPage'}>
-      <Container>
-        <PostHeader {...data.post.frontmatter} />
-        <PostBody mdxBody={data.post.body} />
-        <PostFooter
-          postId={data.post.id}
-          frontmatter={data.post.frontmatter}
-          moreList={data.more.nodes}
-          prev={data.prev}
-          next={data.next}
-        />
-        <Section title="comments" isAccordion={true}>
-          <Commentwidget />
-        </Section>
-      </Container>
+      <PostMainRenderer
+        post={data.post}
+        moreList={data.more.nodes}
+        prev={data.prev}
+        next={data.next}
+      />
     </Layout>
   );
 }
@@ -52,6 +33,7 @@ export const pageQuery = graphql`
     post: mdx(id: { eq: $id }) {
       body
       id
+      tableOfContents
       frontmatter {
         title
         date(formatString: "YYYY-MM-DD")
