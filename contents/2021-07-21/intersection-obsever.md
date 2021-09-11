@@ -1,6 +1,7 @@
 ---
-title: 'Intersection Observer API 이해하기'
+title: 'Intersection Observer API 왜 쓰는지 이해하기'
 date: '2021-07-21'
+category: 'network-web-browser'
 tags: ['web', 'browser']
 ---
 
@@ -8,17 +9,15 @@ tags: ['web', 'browser']
 
 <br />
 
-Image lazy-loading이나 Infinite scroll 등을 구현하기 위해서 사용자가 스크롤해서 끝에 도달했을 때, 다음 데이터를 로딩하고 화면에 렌더링하게 해야 한다. 쉽게 말하자면 사용자가 마지막 요소(Element)를 봤을 때 다음 요소를 만들라는 것이다.
+Image lazy-loading이나 Infinite scroll 등을 구현하려면 사용자가 어떤 위치에 도달했을 때, 다음 데이터를 로딩하고 화면에 렌더링하게 해야 한다. 사용자가 어떤 위치에 도달한 것은 사용자의 화면에 특정 요소(Element)를 등장한 것으로 볼 수 있다.
 
 <br />
 
-여기에서 구현하기 까다로운 것은 사용자가 '마지막 요소를 봤을 때'를 판단하는 코드이다.
-
-이것을 직관적으로 풀면 **사용자가 스크롤할 때마다 마지막 요소가 화면에 보이는지 안보이는지를 계산**하면 된다. 이 방법을 코드로 구현하기 위해서 scroll 이벤트를 처리하는 `EventTarget.addEventListener()`와 element의 위치를 알아내는 `Element.getBoundingClientRect()`를 이용할 수 있다.
+특정 요소가 화면에 보이는지를 판단하는 코드를 직관적으로 풀면 **사용자가 스크롤할 때마다 특정 요소가 화면에 보이는지 안보이는지를 계산**하면 된다. 코드로 구현하기 위해서 scroll 이벤트를 처리하는 `EventTarget.addEventListener()`와 element의 위치를 알아내는 `Element.getBoundingClientRect()`를 이용할 수 있다.
 
 <br />
 
-하지만 직접적인 해결책인 이 방식은 성능에 영향을 줄 만큼 단점이 있다. scroll 이벤트는 당연하게도 스크롤이 될 때마다 일어나기 때문에 event handler에 등록된 함수가 단시간에 무수하게 호출된다. getBoundingClientReact() 함수는 viewport와 element의 상대적인 위치 정보를 반환하기 때문에 스크롤이 될 때마다 새로 계산해야 한다. 이때 함수의 과도한 반복 호출을 막기 위해서 debounce와 throttle을 통해 개선할 수 있다. 하지만 위의 두 가지를 조합한 이 방식의 **근본적인 문제는 더 중요한 부분인 '다음 요소를 만드는' 코드를 실행하기도 전에 '마지막 요소를 봤을 때'를 판단하는 코드를 위해 main thread(브라우저 자바스크립트 엔진의 single thread)를 낭비**한다는 점이다.
+하지만 직접적인 해결책인 이 방식은 단점이 있다. scroll 이벤트는 당연하게도 스크롤이 될 때마다 일어나기 때문에 event handler에 등록된 함수가 단시간에 무수하게 호출된다. getBoundingClientReact() 함수는 viewport와 element의 상대적인 위치 정보를 반환하기 때문에 스크롤이 될 때마다 새로 계산해야 한다. 이때 debounce와 throttle으로 함수가 과도하게 반복 호출되는 것을 막을 수 있다. 하지만 위의 두 가지를 조합한 이 방식의 **근본적인 문제는 사용자에게 보여주기 위하여 다음 요소를 만드는 코드를 실행하기도 전에 특정 요소가 보이는지를 판단하는 코드를 위해 main thread(브라우저 자바스크립트 엔진의 single thread)를 낭비**한다는 점이다.
 
 <br />
 <br />
@@ -27,7 +26,7 @@ Image lazy-loading이나 Infinite scroll 등을 구현하기 위해서 사용자
 
 <br />
 
-Intersection Observser API는 위의 방식이 가진 단점을 영리하게 해결한 API이다. Intersection Observer API의 '마지막 요소를 봤을 때'를 판단하는 것을 개발자에게 맡기지 않고 브라우저에게 넘긴다. 이때 브라우저는 '마지막 요소가 보이는지'를 판단하기 위해 main thread를 사용하지 않는다. **Intersection Observer API를 이용하면 개발자는 '다음 요소를 최적화하여 만드는데' main thread를 온전히 사용**할 수 있게 된다.
+Intersection Observser API는 위의 방식이 가진 단점을 영리하게 해결한 API이다. Intersection Observer API의 특정' 요소가 보이는지를 판단하는 것을 개발자에게 맡기지 않고 브라우저에게 떠넘긴다. 이때 브라우저는 main thread를 사용하지 않는다. **Intersection Observer API를 이용하면 개발자는 다음 요소를 최적화하여 만드는데 main thread를 온전히 사용**할 수 있게 된다.
 
 <br />
 
@@ -36,7 +35,7 @@ Intersection Observser API는 위의 방식이 가진 단점을 영리하게 해
 
 <br />
 
-MDN을 보면 **'Intersection Observer API는 타겟 엘리먼트가 상위 엘리먼트나 뷰포트와 교차하는지 비동기적으로 관찰하는 기능을 제공한다.'**라고 설명한다. 이 말을 풀어서 이해해보자면, Intersection Observer API는 특정 엘리먼트가 화면에 들어오는지, 나가는지, 얼마만큼 보이는지, 다시 말해 화면과 특정 엘리먼트가 **'교차'**하는 것을 감지한다. 앞서 설명한 대로 브라우저는 교차를 계산하기 위해 main thread를 이용하지 않는다. 그래서 이를 **'비동기적으로 관찰'**한다고 표현한다.
+MDN의 설명을 보면 **'Intersection Observer API는 타겟 엘리먼트가 상위 엘리먼트나 뷰포트와 교차하는지 비동기적으로 관찰하는 기능을 제공한다.'**라고 설명한다. 이 말을 풀어서 이해해보자면, Intersection Observer API는 특정 엘리먼트가 화면에 들어오는지, 나가는지, 얼마만큼 보이는지, 다시 말해 화면과 특정 엘리먼트가 **'교차'**하는 것을 감지한다. 앞서 설명한 대로 브라우저는 교차를 계산하기 위해 main thread를 이용하지 않는다. 그래서 이를 **'비동기적으로 관찰'**한다고 표현한다.
 
 <br />
 <br />
@@ -45,7 +44,7 @@ MDN을 보면 **'Intersection Observer API는 타겟 엘리먼트가 상위 엘�
 
 <br />
 
-Intersection Observer API의 사용 방법을 보면 완전히 새로운 방식의 API가 아니라, 이벤트가 발생하면 등록된 함수를 실행하는 보통의 event handler와 비슷한 것을 알 수 있다. 다만 Intersection Observer API가 Event Handler와 다른 점은 **타겟 엘리먼트(Target Element)** 외에 **관찰자(Observer)**를 지정한다는 점이다.
+Intersection Observer API의 사용 방법을 보면 완전히 새로운 방식의 API가 아니라, 이벤트가 발생하면 등록된 함수를 실행하는 event handler와 비슷한 것을 알 수 있다. 다만 Intersection Observer API가 Event Handler와 다른 점은 **타겟 엘리먼트(Target Element)** 외에 **관찰자(Observer)**를 지정한다는 점이다.
 
 <br />
 
@@ -114,9 +113,7 @@ observer.disconnect();
 <br />
 <br />
 
----
-
-### References
+**Learning Resources**
 
 - MDN Web Docs - [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API)
 - HEROPY Tech - [Intersection Observer - 요소의 가시성 관찰](https://heropy.blog/2019/10/27/intersection-observer/)
