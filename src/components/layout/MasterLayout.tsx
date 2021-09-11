@@ -27,7 +27,11 @@ export default function MasterLayout({
     if (isFullPageLayout) {
       setIsSideMenuOpen(false);
     } else {
-      setIsSideMenuOpen(true);
+      if (window.innerWidth <= 960) {
+        setIsSideMenuOpen(false);
+      } else {
+        setIsSideMenuOpen(true);
+      }
     }
   }, [isFullPageLayout]);
 
