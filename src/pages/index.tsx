@@ -52,7 +52,7 @@ export default function Home({ data }: Props) {
   }, [queryString]);
 
   return (
-    <Layout layoutType={'infiniteScroll'} pagePath={''}>
+    <Layout layoutType={'infiniteScroll'} pagePath={'/'}>
       <HomeRenderer postList={postList} />
     </Layout>
   );

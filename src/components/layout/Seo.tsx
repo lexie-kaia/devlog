@@ -35,6 +35,10 @@ export default function Seo({ pageTitle, pageDescription, pagePath }: Props) {
 
   const title = pageTitle ? `${pageTitle} | ${siteTitle}` : `${siteTitle}`;
   const description = pageDescription ? pageDescription : siteDescription;
+  const url =
+    siteUrl.charAt(siteUrl.length - 1) === '/'
+      ? siteUrl.slice(0, siteUrl.length - 1)
+      : siteUrl;
 
   return (
     <Helmet>
@@ -52,26 +56,21 @@ export default function Seo({ pageTitle, pageDescription, pagePath }: Props) {
         content="3d694bff458d9919bcff4831ab27aa4faf5cdaaa"
       />
 
-      <meta property="og:url" content={siteUrl} />
+      <meta property="og:url" content={url} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      {/* <meta
-        property="og:image"
-        content="http://static01.nyt.com/images/2015/02/19/arts/international/19iht-btnumbers19A/19iht-btnumbers19A-facebookJumbo-v2.jpg"
-      /> */}
+      <meta property="og:image" content={`${url}/assets/images/og-image.jpg`} />
 
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {/* <meta
+      <meta
         name="twitter:image"
-        content="https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg"
-      /> */}
+        content={`${url}/assets/images/og-image.jpg`}
+      />
 
-      {(pagePath === '' || pagePath) && (
-        <link rel="canonical" href={`${siteUrl}${pagePath}`} />
-      )}
+      {pagePath && <link rel="canonical" href={`${url}${pagePath}`} />}
     </Helmet>
   );
 }

@@ -14,7 +14,7 @@ function PostTemplate({ data }: Props) {
       layoutType={'fullPage'}
       pageTitle={data.post.frontmatter.title}
       pageDescription={data.post.excerpt}
-      pagePath={data.post.slug}
+      pagePath={`/${data.post.slug}`}
     >
       <PostMainRenderer
         post={data.post}
