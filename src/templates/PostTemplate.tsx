@@ -10,7 +10,12 @@ type Props = {
 
 function PostTemplate({ data }: Props) {
   return (
-    <Layout layoutType={'fullPage'}>
+    <Layout
+      layoutType={'fullPage'}
+      pageTitle={data.post.frontmatter.title}
+      pageDescription={data.post.excerpt}
+      pagePath={data.post.slug}
+    >
       <PostMainRenderer
         post={data.post}
         moreList={data.more.nodes}
@@ -33,6 +38,8 @@ export const pageQuery = graphql`
     post: mdx(id: { eq: $id }) {
       body
       id
+      excerpt
+      slug
       tableOfContents
       frontmatter {
         title

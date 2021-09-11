@@ -4,13 +4,23 @@ import { graphql, useStaticQuery } from 'gatsby';
 import MasterLayout from './MasterLayout';
 // types
 import { LayoutTypeType, PostType } from '../../types';
+import Seo from './Seo';
 
 type Props = {
   children: ReactNode;
   layoutType?: LayoutTypeType;
+  pageTitle?: string;
+  pageDescription?: string;
+  pagePath?: string;
 };
 
-export default function Layout({ children, layoutType }: Props) {
+export default function Layout({
+  children,
+  layoutType,
+  pageTitle,
+  pageDescription,
+  pagePath,
+}: Props) {
   const data = useStaticQuery(graphql`
     query QueryPostsOnlyWithCategoryAndTag {
       allMdx {
@@ -59,12 +69,19 @@ export default function Layout({ children, layoutType }: Props) {
   }, [data]);
 
   return (
-    <MasterLayout
-      categoryList={categoryList}
-      tagList={tagList}
-      isFullPageLayout={layoutType === 'fullPage' ? true : false}
-    >
-      {children}
-    </MasterLayout>
+    <>
+      <Seo
+        pageTitle={pageTitle}
+        pageDescription={pageDescription}
+        pagePath={pagePath}
+      />
+      <MasterLayout
+        categoryList={categoryList}
+        tagList={tagList}
+        isFullPageLayout={layoutType === 'fullPage' ? true : false}
+      >
+        {children}
+      </MasterLayout>
+    </>
   );
 }
