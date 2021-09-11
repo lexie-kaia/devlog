@@ -56,7 +56,7 @@ export default function Seo({ pageTitle, pageDescription, pagePath }: Props) {
         content="3d694bff458d9919bcff4831ab27aa4faf5cdaaa"
       />
 
-      <meta property="og:url" content={url} />
+      <meta property="og:url" content={`${url}${pagePath}`} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
