@@ -20,6 +20,15 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: ['G-6L5DHH7NKM'],
+        pluginConfig: {
+          head: true,
+        },
+      },
+    },
     `gatsby-plugin-emotion`,
     `gatsby-plugin-image`,
     {
