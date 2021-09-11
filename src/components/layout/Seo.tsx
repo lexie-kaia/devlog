@@ -43,6 +43,15 @@ export default function Seo({ pageTitle, pageDescription, pagePath }: Props) {
       <meta name="author" content={author} />
       <meta name="description" content={description} />
 
+      <meta
+        name="google-site-verification"
+        content="gSO3c8LykLYRcQYDNgy5w3boLBlF9QZx2ren2hYiqd0"
+      />
+      <meta
+        name="naver-site-verification"
+        content="3d694bff458d9919bcff4831ab27aa4faf5cdaaa"
+      />
+
       <meta property="og:url" content={siteUrl} />
       <meta property="og:type" content="article" />
       <meta property="og:title" content={title} />
