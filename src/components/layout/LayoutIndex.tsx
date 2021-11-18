@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 // components
 import MasterLayout from './MasterLayout';

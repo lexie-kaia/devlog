@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { graphql } from 'gatsby';
 import * as queryStringParser from 'query-string';
 // components

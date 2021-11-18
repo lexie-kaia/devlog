@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  Dispatch,
-  SetStateAction,
-  KeyboardEvent,
-} from 'react';
+import React, { useState, KeyboardEvent } from 'react';
 import styled from '@emotion/styled';
 import { ChevronDown } from 'react-bootstrap-icons';
 // components

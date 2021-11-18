@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import PostItemRenderer from './PostItem';
-import { PostListStyleType, PostsType, QueryStringType } from '../../../types';
+import { PostListStyleType, PostsType } from '../../../types';
 import { useQueryString } from '../../../store/Location';
 
 type Props = {
